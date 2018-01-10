@@ -12,7 +12,7 @@
 <meta name="author" content="Rodrigo Zepeda" />
 
 
-<title>Sumas, sumas y más sumas (sumas finitas 1)</title>
+<title>Sumas, sumas y más sumas</title>
 
 <script src="Sumas_1_files/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -234,7 +234,7 @@ div.tocify {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-            <a class="navbar-brand" href="https://rodrigozepeda.github.io/Calculo3">Notas de Cálculo III (ITAM)</a>
+            <a class="navbar-brand" href="https://rodrigozepeda.github.io/Calculo3">Notas de Cálculo III</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-main">
@@ -255,15 +255,17 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Sumas, sumas y más sumas (sumas finitas 1)</h1>
+<h1 class="title toc-ignore">Sumas, sumas y más sumas</h1>
 <h4 class="author"><em>Rodrigo Zepeda</em></h4>
 
 </div>
 
 
-<div id="un-problema-de-interes" class="section level1">
-<h1><span class="header-section-number">1</span> Un problema de interés</h1>
-<p>Una cuenta de ahorro (por ejemplo la del retiro o para cuando metas a tu descendencia a la escuela) funciona más o menos de la siguiente manera. Cada día primero de mes depositas una cantidad fija de <span class="math inline">\(P\)</span> pesos y cada fin de mes el banco te da <span class="math inline">\(k\)</span> % del dinero que tenías al inicio. Aterrizándolo con números, cada mes depositas <span class="math inline">\(100\)</span> pesos y el banco te da <span class="math inline">\(2\)</span>% del dinero que tenías el mes anterior. Por ejemplo: la tabla  muestra el dinero que tienes durante el primer año</p>
+<div id="dos-problemas-iniciales" class="section level1">
+<h1><span class="header-section-number">1</span> Dos problemas iniciales</h1>
+<div id="un-problema-de-intereses" class="section level2">
+<h2><span class="header-section-number">1.1</span> Un problema de intereses</h2>
+<p>Una cuenta de ahorro (por ejemplo la del retiro o para cuando metas a tu descendencia a la escuela) funciona más o menos de la siguiente manera: cada día primero de mes depositas una cantidad fija de <span class="math inline">\(P\)</span> pesos y cada fin de mes el banco te da <span class="math inline">\(k\)</span> % del dinero que tenías al inicio. Aterrizándolo con números, cada mes depositas <span class="math inline">\(100\)</span> pesos y el banco te da <span class="math inline">\(2\)</span>% (<span class="math inline">\(0.02 \times 100 \%\)</span>) del dinero total que tenías el mes anterior. Por ejemplo: la tabla  muestra el dinero que tienes durante el primer año</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -386,15 +388,15 @@ S_4 &amp; = \underbrace{P}_{\textrm{Nuevo depósito}} + \underbrace{S_3}_{\textr
 \end{aligned}
 \end{equation}\]</span>
 Mi hipótesis es que, al mes <span class="math inline">\(n\)</span>, el saldo en la cuenta estará dado por:
-<span class="math display">\[\begin{equation}\label{problema}
+<span class="math display">\[\begin{equation}\nonumber
     S_n = P + (1 + k) P + (1 + k)^2 P +  (1 + k)^3 P  + \dots +  (1 + k)^{n-2} P + (1 + k)^{n-1} P
 \end{equation}\]</span>
 <p>Nota que esto es una sumota y hacerlo a mano va a estar terrible si nuestro ahorro es, por ejemplo, a <span class="math inline">\(20\)</span> años (<em>i.e.</em> <span class="math inline">\(240\)</span> meses). Peor problema: dada una tasa <span class="math inline">\(k = 0.5\)</span> fija, supongamos que nos interesa saber el valor <span class="math inline">\(P\)</span> que tenemos que depositar cada mes para en <span class="math inline">\(5\)</span> años (<span class="math inline">\(60\)</span> meses) tener <span class="math inline">\(50,000\)</span> pesos. ¿Cómo le hacemos?</p>
 <p>Éste es el problema que intentaremos resolver en esta sección de las notas. Para ello introduciremos notación que nos ayudará a manejar sumas así de grandes, veremos varios ejemplos de sumas y finalmente encontraremos un método para calcular rápidamente estas sumas (y de paso más propiedades de estos intereses).</p>
 </div>
-<div id="la-suma-de-los-primeros-enteros" class="section level1">
-<h1><span class="header-section-number">2</span> La suma de los primeros enteros</h1>
-<p>Antes de intentar resolver la suma de la <a href="#ahorro-para-el-viaje-a-acapulco">sección anterior</a> (que fue la que empezó todo esto) empezaremos con una pregunta más sencilla. ¿Cómo se ve la suma de los primeros <span class="math inline">\(n\)</span> números naturales? Es decir: ¿existirá una fórmula para <span class="math inline">\(1 + 2 + 3 + \dots + n\)</span>? Cuenta la leyenda (y sólo es una leyenda) que cuando Gauß, (Juan Carlos Federico Gauss o Charley para los cuates) era pequeño su maestro decidió castigarlo diciéndole que sumara los números del <span class="math inline">\(1\)</span> al <span class="math inline">\(100\)</span> y el niño obtuvo la fórmula y sumó todos los números rapidísimo ante el asombro del mundo entero (¿y tú qué hacías a los <span class="math inline">\(8\)</span> años?).</p>
+<div id="la-suma-de-los-primeros-enteros" class="section level2">
+<h2><span class="header-section-number">1.2</span> La suma de los primeros enteros</h2>
+<p>Antes de intentar resolver la suma de la <a href="#ahorro-para-el-viaje-a-acapulco">sección anterior</a> (que fue la que empezó todo esto) empezaremos con una pregunta más sencilla. ¿Cómo se ve la suma de los primeros <span class="math inline">\(n\)</span> números naturales? Es decir: ¿existirá una fórmula para <span class="math inline">\(1 + 2 + 3 + \dots + n\)</span>? Cuenta la leyenda (y sólo es una leyenda) que cuando Gauß, (Juan Carlos Federico Gauss o Charley para los cuates) era pequeño su maestro decidió castigarlo diciéndole que sumara los números del <span class="math inline">\(1\)</span> al <span class="math inline">\(100\)</span> y el niño obtuvo la fórmula y sumó todos los números rapidísimo ante el asombro del mundo entero.</p>
 La forma en la que se encuentra esta fórmula es bastante creativa: comenzamos con enlistar los números del <span class="math inline">\(1\)</span> hasta el <span class="math inline">\(n\)</span>:
 <span class="math display">\[\begin{equation}\nonumber
     1 + 2 + 3 + \dots + (n-2) + (n-1) + n;
@@ -416,7 +418,7 @@ Tenemos entonces la igualdad siguiente:
 <span class="math display">\[\begin{equation}\nonumber
     (1 + 2 + \dots + n) + (1 + 2 + \dots + n) = n (n+1),
 \end{equation}\]</span>
-Lo cual implica que
+la cual implica que
 <span class="math display">\[\begin{equation}\nonumber
     2 \cdot (1 + 2 + \dots + n) = n (n+1),
 \end{equation}\]</span>
@@ -450,7 +452,7 @@ Nada más, por poner un ejemplo, consideremos la suma de los números <span clas
 <p>(-pausa en lo que checas con una calculadora que sí te dé-). Por supuesto que esta fórmula nos ayuda en ejemplos más complicados como el siguiente:</p>
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.0674678911454976Una suma más complicada class="panel-heading">
+	<div id =  Ejemplo0.898518709233031Una suma más complicada class="panel-heading">
 		<h4> Ejemplo 1 [ Una suma más complicada ] </h4>
 	</div>
 	<div class="panel-body">
@@ -461,11 +463,11 @@ Calcula la suma de los enteros desde $777$ hasta $1892$; es decir calcula:
 \end{equation}
 </i>
 		<div class="well" style = "margin-top: 10px;">
-			 <b>Demostración:</b> ¡No tenemos fórmula para esto! Pero podemos sacarle la vuelta. Notamos que nuestra suma la podemos ver como:
+			 <b>Demostración:</b> ¡No tenemos fórmula para esto! Pero podemos sacarle la vuelta. Notamos que nuestra suma la podemos ver como la resta de dos sumas que sí tenemos:
 \begin{equation}\nonumber
 \begin{aligned}
 777 & + 778  + 779 + \dots + 1890 + 1891 + 1892 
-\\ & = \underbrace{\Big( 1 + 2 + 3 + \dots + 1890 + 1891 + 1892 \Big)}_{\textrm{ la suma de los primeros } 1892 \textrm{ enteros }} - \underbrace{\Big( 1 + 2 + 3 + \dots + 774 + 775 + 776 \Big)}_{\textrm{La suma de los primeros } 776}
+\\ & = \underbrace{\Big( 1 + 2 + 3 + \dots + 1890 + 1891 + 1892 \Big)}_{\textrm{ la suma de los primeros } 1892 \textrm{ enteros }} \ & \qquad - \underbrace{\Big( 1 + 2 + 3 + \dots + 774 + 775 + 776 \Big)}_{\textrm{La suma de los primeros } 776}
 \\ & = \frac{1892 (1892 + 1)}{2} - \frac{776 (776 + 1)}{2} 
 \\ & = 1790778 - 301476
 \\ & = 1489302
@@ -478,12 +480,13 @@ Calcula la suma de los enteros desde $777$ hasta $1892$; es decir calcula:
 
 <p>El ejemplo muestra no sólo que las sumas salen de fórmulas sino que sumas específicas requieren de “trucos”. En este caso el “truco” fue plantear la suma inicial como una suma a la cual se le resta otra y entonces sí aplicar la fórmula que sabemos. Por favor, no intentes memorizarte las fórmulas para las sumas: la única que necesitas memorizar es la geométrica; todas las demás lo importante es aprender el truco no la fórmula. ¡No te pierdas en eso!</p>
 </div>
-<div id="sumas-finitas" class="section level1">
-<h1><span class="header-section-number">3</span> Sumas finitas</h1>
-<div id=" Advertencia0.04472113144584 " class="alert alert-warning">
+</div>
+<div id="como-escribir-una-suma" class="section level1">
+<h1><span class="header-section-number">2</span> Cómo escribir una suma</h1>
+<div id=" Advertencia0.714223893126473 " class="alert alert-warning">
 <b> Advertencia : </b> Esta sección es muy importante así que asegúrate de entenderla bien.
 </div>
-Es muy engorroso estar poniendo puntos suspensivos en la suma (como en <a href="#sumanaturales">el teorema anterior</a> ) sobre todo en sumas en las que no es tan obvio cómo evolucionan los coeficientes. La pregunta principal es cómo denotar los sumandos. Una opción sería con letras. Por ejemplo, para la suma de los primeros <span class="math inline">\(8\)</span> enteros podríamos poner algo del estilo:
+Es muy engorroso estar poniendo puntos suspensivos en la suma (como en <a href="#un-problema-de-intereses">el teorema anterior</a> ) sobre todo en sumas en las que no es tan obvio cómo evolucionan los coeficientes. La pregunta principal es cómo denotar los sumandos. Una opción sería con letras. Por ejemplo, para la suma de los primeros <span class="math inline">\(8\)</span> enteros podríamos poner algo del estilo:
 <span class="math display">\[\begin{equation}\nonumber
 a + b + c + d + e + f + g + h
 \end{equation}\]</span>
@@ -501,13 +504,16 @@ o bien, poniéndolo como <span class="math inline">\(n\)</span> e indicando qui�
 \end{equation}\]</span>
 Por último, para representar la suma <span class="math inline">\(1 + 2 + 3 + \dots + n\)</span> analizamos cómo son los sumandos en cada “paso” de la suma (<em>i.e.</em> como se ven las <span class="math inline">\(a\)</span> en cada paso). Es decir: en el primer paso <span class="math inline">\(a_1\)</span> estamos poniendo un <span class="math inline">\(1\)</span>; en el paso <span class="math inline">\(2\)</span> correspondiente a <span class="math inline">\(a_2\)</span> estamos poniendo un <span class="math inline">\(2\)</span>; en el paso <span class="math inline">\(3\)</span>, relacionado a <span class="math inline">\(a_3\)</span> sumamos un <span class="math inline">\(3\)</span>. De manera general en el paso <span class="math inline">\(k\)</span>, asociado a una <span class="math inline">\(a_k\)</span> general, estaremos poniendo una <span class="math inline">\(k\)</span>. Esto lo podemos poner de manera resumida como:
 <span class="math display">\[\begin{equation}\nonumber
-    \underbrace{a_1 + a_2 + a_3 + \dots + a_{n}}_{\text{La suma}}, \qquad \underbrace{n = 178,967,651,666, 911,293}_{\text{Hasta dónde sumé}} \qquad \underbrace{a_k = k}_{\text{Cómo se ven los sumandos}}, \underbrace{\qquad 1 \leq k \leq n}_{\text{De dónde a dónde va la suma}}.
+\begin{aligned}
+    \underbrace{a_1 + a_2 + a_3 + \dots + a_{n}}_{\text{La suma}}, &amp; \qquad \underbrace{n = 178,967,651,666, 911,293}_{\text{Hasta dónde sumé}} 
+    \\ \underbrace{a_k = k}_{\text{Cómo se ven los sumandos}}, &amp; \underbrace{\qquad 1 \leq k \leq n}_{\text{De dónde a dónde va la suma}}.
+\end{aligned}
 \end{equation}\]</span>
-Como te darás cuenta esta notación es un rollo gigante. ¡Debería haber una forma de escribirlo más en compacto! Para ello los matemáticos usan la letra griega <span class="math inline">\(\Sigma\)</span> (sigma mayúscula por suma <em>en alemán</em>). La forma en la que se utiliza es así:
+Como te darás cuenta esta notación es un rollo gigante. ¡Debería haber una forma más compacta de escribir esto! Para ello los matemáticos usan la letra griega <span class="math inline">\(\Sigma\)</span> (sigma mayúscula por suma <em>en alemán</em>). La forma en la que se utiliza es así:
 <span class="math display">\[\begin{equation}\nonumber
     \sum\limits_{k = 1}^{n} a_k
 \end{equation}\]</span>
-donde la notación es: <span class="math inline">\(a_k\)</span> son las cosas a sumar, <span class="math inline">\(n\)</span> es el índice del último sumando y <span class="math inline">\(k\)</span> es el índice del primer sumando. Es decir, <span class="math inline">\(\sum\limits_{k = 1}^{n} a_k\)</span> nos dice que debemos sumar los <span class="math inline">\(a_k\)</span> empezando en <span class="math inline">\(1\)</span> y hasta <span class="math inline">\(n\)</span>. Por ejemplo:
+donde la notación es: <span class="math inline">\(a_k\)</span> son las cosas a sumar (sumandos), <span class="math inline">\(n\)</span> es el índice del último sumando y <span class="math inline">\(k\)</span> es el índice del primer sumando. Es decir, <span class="math inline">\(\sum\limits_{k = 1}^{n} a_k\)</span> nos dice que debemos sumar los <span class="math inline">\(a_k\)</span> empezando en <span class="math inline">\(1\)</span> y hasta <span class="math inline">\(n\)</span>. Por ejemplo:
 <span class="math display">\[\begin{equation}\nonumber
     \sum\limits_{k = 1}^{5} a_k = a_1 + a_2 + a_3 + a_4 + a_5
 \end{equation}\]</span>
@@ -525,23 +531,23 @@ o bien:
 \end{equation}\]</span>
 En muchas ocasiones se dan “fórmulas”&quot; para los <span class="math inline">\(a_k\)</span> de manera explícita. Por ejemplo, para escribir los números tal cual como en :
 <span class="math display">\[\begin{equation}\nonumber
-    \sum\limits_{k = 1}^{n} \underbrace{k}_{a_k} = \underbrace{1}_{a_1} + \underbrace{2}_{a_2} + \underbrace{3}_{a_3} + \dots + \underbrace{a_n}.
+    \sum\limits_{k = 1}^{n} \underbrace{k}_{a_k} = \underbrace{1}_{a_1} + \underbrace{2}_{a_2} + \underbrace{3}_{a_3} + \dots + \underbrace{n}_{a_n},
 \end{equation}\]</span>
-así, por ejemplo:
+en cuyo caso las <span class="math inline">\(a_k\)</span> (genéricas) son de la forma <span class="math inline">\(a_k = k\)</span>; por ejemplo:
 <span class="math display">\[\begin{equation}\nonumber
-    \sum\limits_{k = 1}^{5} k = \underbrace{1}_{a_1} + \underbrace{2}_{a_2} + \underbrace{3}_{a_3} + \underbrace{4}_{a_4} + \underbrace{5}_{a_5}
+    \sum\limits_{k = 1}^{5} k = \underbrace{1}_{a_1} + \underbrace{2}_{a_2} + \underbrace{3}_{a_3} + \underbrace{4}_{a_4} + \underbrace{5}_{a_5},
 \end{equation}\]</span>
 o bien
 <span class="math display">\[\begin{equation}\nonumber
-    \sum\limits_{k = -7}^{-2} k = \underbrace{-7}_{a_{-7}} + \underbrace{(-6)}_{a_{-6}} + \underbrace{(-5)}_{a_{-5}} + \underbrace{(-4)}_{a_{-4}} + \underbrace{(-3)}_{a_{-3}} + \underbrace{(-2)}_{a_{-2}}
+    \sum\limits_{k = -7}^{-2} k = \underbrace{-7}_{a_{-7}} + \underbrace{(-6)}_{a_{-6}} + \underbrace{(-5)}_{a_{-5}} + \underbrace{(-4)}_{a_{-4}} + \underbrace{(-3)}_{a_{-3}} + \underbrace{(-2)}_{a_{-2}}.
 \end{equation}\]</span>
 Las letras <span class="math inline">\(k\)</span> y <span class="math inline">\(n\)</span> en  no tienen nada de especial; las podemos reemplazar por letras diferentes (¡distintas!) y no pasa nada:
 <span class="math display">\[\begin{equation}\nonumber
-    \sum\limits_{i = 1}^{m} i = 1 + 2 + 3 + \dots + m
+    \sum\limits_{i = 1}^{m} i = 1 + 2 + 3 + \dots + m.
 \end{equation}\]</span>
 Otros ejemplo de suma interesante es:
 <span class="math display">\[\begin{equation}\nonumber
-    \sum\limits_{i = 1}^{n} 1 = \underbrace{1 + 1 + \dots + 1}_{n \textrm{ unos en total}} = n
+    \sum\limits_{i = 1}^{n} 1 = \underbrace{1 + 1 + \dots + 1}_{n \textrm{ unos en total}} = n,
 \end{equation}\]</span>
 en el cual <span class="math inline">\(a_1 = a_2 = \dots = a_n = 1\)</span> todos los <span class="math inline">\(a_i\)</span> son <span class="math inline">\(1\)</span> (ojo son <span class="math inline">\(a_i\)</span> y no <span class="math inline">\(a_k\)</span> porque el índice de la suma en ésta es <span class="math inline">\(i\)</span>). Podemos tener una suma que cambia de signo sus sumandos:
 <span class="math display">\[\begin{equation}\nonumber
@@ -549,17 +555,18 @@ en el cual <span class="math inline">\(a_1 = a_2 = \dots = a_n = 1\)</span> todo
     \sum\limits_{k = 1}^{n} (-1)^k &amp; = \underbrace{-1}_{a_1} + \underbrace{(-1)^2}_{a_2} + \underbrace{(-1)^3}_{a_3} +\underbrace{(-1)^4}_{a_4} + \dots + \underbrace{(-1)^n}_{a_n} \\
     &amp; = -1 + 1 - 1 + 1 + \dots + (-1)^n \\
     &amp; = \begin{cases}
- 0 &amp; \textrm{ si } n \textrm{ es par}   \\
-  -1 &amp; \textrm{ si } n \textrm{ es non} 
+ 0 &amp; \textrm{ si } n \textrm{ es par},  \\
+  -1 &amp; \textrm{ si } n \textrm{ es non}.
  \end{cases}
 \end{aligned}
 \end{equation}\]</span>
-En este caso los <span class="math inline">\(a_k = (-1)^k\)</span>. En un acto de rebeldía intercambié <span class="math inline">\(n\)</span> y <span class="math inline">\(k\)</span> porque son variables mudas que no afectan <em>el significado de la suma</em>:
+<p>En este caso los <span class="math inline">\(a_k = (-1)^k\)</span>.</p>
+En un acto de rebeldía podemos intercambiar <span class="math inline">\(n\)</span> y <span class="math inline">\(k\)</span> porque son variables mudas que no afectan <em>el significado de la suma</em>:
 <span class="math display">\[\begin{equation}\nonumber
     \sum\limits_{n = 1}^{k} n^2  = \underbrace{1^2}_{a_1} + \underbrace{2^2}_{a_2} + \dots + \underbrace{k^2}_{a_k}
 \end{equation}\]</span>
-<p>En ese caso las <span class="math inline">\(a_n\)</span> (nota que son <span class="math inline">\(a_n\)</span> porque el índice de la suma en ésa es <span class="math inline">\(n\)</span>) están dadas por <span class="math inline">\(a_n = n^2\)</span>.</p>
-<div id=" Nota0.237042218679562 " class="alert alert-info">
+<p>En ese caso las <span class="math inline">\(a_n\)</span> (nota que son <span class="math inline">\(a_n\)</span> porque el índice de esta suma es <span class="math inline">\(n\)</span>) están dadas por <span class="math inline">\(a_n = n^2\)</span>.</p>
+<div id=" Nota0.137907253112644 " class="alert alert-info">
 <b> Nota : </b> Los <span class="math inline">\(a_k\)</span> son como denotamos ‘genéricamente’ a los sumandos de una suma. Como ya vimos en los párrafos anteriores, sumas diferentes tienen diferentes sumandos y por tanto diferentes <span class="math inline">\(a_k\)</span>. Aterrizando esto un poco, en la suma:
 <span class="math display">\[\begin{equation}\nonumber
 \sum\limits_{k = 1}^{n} 100^{k} = 100^1 + 100^2 + \dots + 100^n
@@ -573,7 +580,7 @@ los sumandos son de la forma tangente ‘de algo’. Un sumando genérico de est
 <p>Estudiemos algunos ejemplos de sumas nada más por no dejar.</p>
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.869283007225022  class="panel-heading">
+	<div id =  Ejemplo0.839489765930921  class="panel-heading">
 		<h4> Ejemplo 2 </h4>
 	</div>
 	<div class="panel-body">
@@ -588,7 +595,7 @@ En este caso los sumandos $a_{\ell}$ son de la forma $a_{\ell} =  \frac{1}{\ell}
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.409406439401209  class="panel-heading">
+	<div id =  Ejemplo0.535243505146354  class="panel-heading">
 		<h4> Ejemplo 3 </h4>
 	</div>
 	<div class="panel-body">
@@ -603,14 +610,14 @@ En este caso los sumandos $a_m = \frac{7m}{\ln (m + 4)}$.
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.307933709118515  class="panel-heading">
+	<div id =  Ejemplo0.161988781299442  class="panel-heading">
 		<h4> Ejemplo 4 </h4>
 	</div>
 	<div class="panel-body">
 		<i>
 La suma:
 \begin{equation}\nonumber
-\sum\limits_{k = 0}^{n} (-1)^k \frac{1}{k} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \dots + (-1)^n \frac{1}{n}
+\sum\limits_{k = 1}^{n} (-1)^{k+1} \frac{1}{k} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \dots + (-1)^{n+1} \frac{1}{n}
 \end{equation}
 En este caso los sumandos $a_k = (-1)^k \frac{1}{k}$. 
 </i>	</div>
@@ -618,7 +625,7 @@ En este caso los sumandos $a_k = (-1)^k \frac{1}{k}$.
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.260326182236895  class="panel-heading">
+	<div id =  Ejemplo0.907297460827976  class="panel-heading">
 		<h4> Ejemplo 5 </h4>
 	</div>
 	<div class="panel-body">
@@ -633,7 +640,7 @@ En este caso los sumandos $a_k = 5$. La razón por la que tenemos $9$ cincos es 
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.821313698310405  class="panel-heading">
+	<div id =  Ejemplo0.370967396302149  class="panel-heading">
 		<h4> Ejemplo 6 </h4>
 	</div>
 	<div class="panel-body">
@@ -648,7 +655,7 @@ En este caso los sumandos $a_k = 2k$. La razón por la que tenemos la suma hasta
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.973388680489734Una suma por casos class="panel-heading">
+	<div id =  Ejemplo0.973334505222738Una suma por casos class="panel-heading">
 		<h4> Ejemplo 7 [ Una suma por casos ] </h4>
 	</div>
 	<div class="panel-body">
@@ -666,7 +673,7 @@ En este caso los sumandos $a_n = 2n$.
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.260193682275712Notación para no sumar al que nos cae mal class="panel-heading">
+	<div id =  Ejemplo0.0638581509701908Notación para no sumar al que nos cae mal class="panel-heading">
 		<h4> Ejemplo 8 [ Notación para no sumar al que nos cae mal ] </h4>
 	</div>
 	<div class="panel-body">
@@ -684,7 +691,7 @@ esto es la suma de los primeros $12$ enteros <b>sin el $3$</b>. Una forma de den
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.154479552758858Series de potencias 1 class="panel-heading">
+	<div id =  Ejemplo0.960069395601749Series de potencias 1 class="panel-heading">
 		<h4> Ejemplo 9 [ Series de potencias 1 ] </h4>
 	</div>
 	<div class="panel-body">
@@ -706,7 +713,7 @@ f(1) = 1 + 2(1)^2 + 3(1)^3 + 4(1)^4 = 10
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.42575906123966Polinomios class="panel-heading">
+	<div id =  Ejemplo0.859308941522613Polinomios class="panel-heading">
 		<h4> Ejemplo 10 [ Polinomios ] </h4>
 	</div>
 	<div class="panel-body">
@@ -734,7 +741,7 @@ f(x) = \sum\limits_{k = 0}^{n} \alpha_k x^k = \alpha_0 + \alpha_1 x + \alpha_2 x
 
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.0197460004128516Sumas dobles class="panel-heading">
+	<div id =  Ejemplo0.878894323948771Sumas dobles class="panel-heading">
 		<h4> Ejemplo 11 [ Sumas dobles ] </h4>
 	</div>
 	<div class="panel-body">
@@ -752,20 +759,20 @@ Una forma más complicada de expresar sumas es cuando consideras sumas de sumas 
 <p>Finalmente, después de haber visto muchas, procederemos a la definición de suma <span class="citation">Zogaib (2013)</span>:</p>
 
 <div class="panel panel-info">
-	<div id =  Definición0.300299696624279Suma finita class="panel-heading">
+	<div id =  Definición0.499770517461002Suma finita class="panel-heading">
 		<h4> Definición 1 [ Suma finita ] </h4>
 	</div>
 	<div class="panel-body">
 		<i>
 Dada una colección finita de números reales $\{a_{k}, a_{k+1}, a_{k+2}, \dots, a_{n} \}$ (con $k \leq n$) definimos la <b>suma finita</b> de dichos números como la expresión:
 \begin{equation}\nonumber
-\sum\limits_{i = k}^{n} a_{i} = a_{k} + a_{k+1} + \dots + a_{n}
+\sum\limits_{i = k}^{n} a_{i} = a_{k} + a_{k+1} + \dots + a_{n},
 \end{equation}
-donde $i = k, k + 1, \dots, n$ denota el <b>índice</b> de la suma, $a_{j}$ representa el $j$-ésimo sumando ($j = k, k + 1, \dots, n$), $k$ es el <b>índice inferior</b> y $n$ el <b>índice superior</b>.
+donde $i = k, k + 1, \dots, n$ denota el <b>índice</b> de la suma, $a_{i}$ representa el $i$-ésimo sumando ($j = k, k + 1, \dots, n$), $k$ es el <b>índice inferior</b> y $n$ el <b>índice superior</b>.
 </i>	</div>
 </div>
 
-<div id=" Nota0.984037325717509 " class="alert alert-info">
+<div id=" Nota0.809457295807078 " class="alert alert-info">
 <b> Nota : </b> Por cuestiones de edición (formato de párrafos) muchas veces denotamos la suma
 <span class="math display">\[\begin{equation}\nonumber
 \sum\limits_{i = k}^{n} a_{i}
@@ -785,11 +792,103 @@ Esto es bastante útil cuando no hay una receta para cómo escribir los números
 \end{equation}\]</span>
 </div>
 </div>
-<div id="ejemplos-de-sumas" class="section level1">
-<h1><span class="header-section-number">4</span> Ejemplos de sumas</h1>
+<div id="tecnicas-para-reducir-sumas" class="section level1">
+<h1><span class="header-section-number">3</span> Técnicas para reducir sumas</h1>
 <p>En esta sección vamos a intentar deducir formas de obtener fórmulas para sumas interesantes. Como veremos no hay un solo “truco” que salga bien o una técnica única. Mucho de las sumas es de creatividad, de tener la idea. La forma de desarrollar esa creatividad es haciendo muchas sumas así que ¡adelante!</p>
+<div id="sumas-como-areas-o-volumenes" class="section level2">
+<h2><span class="header-section-number">3.1</span> Sumas como áreas o volúmenes</h2>
+<div id="suma-de-los-primeros-n-enteros" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Suma de los primeros <span class="math inline">\(n\)</span> enteros</h3>
+Uno de los trucos más interesantes para una suma es verla desde una perspectiva geométrica como área o volumen. Para poner un ejemplo de lo que quiero decir, considera de nuevo la suma de los primeros <span class="math inline">\(n\)</span> enteros.
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{k = 1}^{n} k = 1 + 2 + \dots + n
+\end{equation}\]</span>
+<p>La suma de los primeros <span class="math inline">\(n\)</span> enteros es equivalente al área generada por <span class="math inline">\(\sum_{k = 1}^{n} k\)</span> cuadrados de longitud <span class="math inline">\(1\)</span>. El chiste de todo es saber cómo acomodar esos cuadrados. Por simplificar la idea, consideremos <span class="math inline">\(n = 10\)</span> y supongamos queremos calcular la suma <span class="math inline">\(1 + 2 + \dots + 10\)</span> (que ya sabemos es <span class="math inline">\(55\)</span> ¿cierto?). Una forma de acomodar los cuadrados para que vayan <em>ad-hoc</em> con la suma es como una pirámide alineada a la izquierda:</p>
+<p><img src="Sumas_1_files/figure-html/unnamed-chunk-18-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>Nota que el área de la pirámide es relativamente fácil de calcular pues es un triángulo (pirámide grande) unido a <span class="math inline">\(10\)</span> triangulitos (ver figura abajo). El triángulo grande mide de base <span class="math inline">\(10\)</span> y de altura <span class="math inline">\(10\)</span> por lo que su área es <span class="math inline">\(10 \times 10 / 2 = 50\)</span> mientras que los pequeños como vienen de cuadrados que miden <span class="math inline">\(1\)</span> cada uno de ellos mide <span class="math inline">\(1/2\)</span> y por tanto los <span class="math inline">\(10\)</span> triangulitos tienen área (conjunta) de <span class="math inline">\(5\)</span> por lo que el área total de la pirámide es <span class="math inline">\(55\)</span> y por lo tanto la suma es <span class="math inline">\(55\)</span>.</p>
+<p><img src="Sumas_1_files/figure-html/unnamed-chunk-19-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>Este mismo argumento se puede hacer para la suma de <span class="math inline">\(n\)</span> enteros considerando triángulos más grandes:</p>
+<p><img src="Sumas_1_files/figure-html/unnamed-chunk-20-1.png" width="384" style="display: block; margin: auto;" /></p>
+La fórmula general será:
+<span class="math display">\[\begin{equation}\nonumber
+\text{Área del grande} + n \cdot \text{Área de los pequeños} = \frac{n \cdot n}{2} + n \frac{1}{2} = \frac{n(n+1)}{2}
+\end{equation}\]</span>
+<p>de donde obtenemos el mismo resultado que ya teníamos pero por otro camino. ¡Genial!</p>
+</div>
+<div id="suma-de-cuadrados" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Suma de cuadrados</h3>
+Para la suma de cuadrados, una opción (presentada por <span class="citation">Siu (1984)</span>) es considerar pirámides de cubos unitarios donde el número de cubos en cada piso corresponde con el número de piso cuadrado. Así en el primer piso habrá <span class="math inline">\(1^2 = 1\)</span> cubo; en el segundo piso, <span class="math inline">\(2^2 = 4\)</span> cubos; en el tercero, <span class="math inline">\(3^2 = 9\)</span> cubos y así sucesivamente (ver figura abajo). El volumen de la pirámide debería corresponder con la suma de cuadrados:
+<span class="math display">\[\begin{equation}\nonumber
+1^2 + 2^2 + 3^2 + \dots + n^2 = \sum\limits_{k = 1}^{n} k^2.
+\end{equation}\]</span>
+<!--html preserve-->
+<p align="center">
+<img src="images/sumsquares1.svg" width="50%" onerror="this.src='images/sumsquares1.png'">
+</p>
+<!--/html preserve-->
+<p>A mí de la pirámide sola no se me ocurre qué hacer (¿a ti sí?); empero, podemos generar 3 pirámides idénticas sólo que rotadas y trasladadas para armar una especie de rompecabezas con ellas:</p>
+<!--html preserve-->
+<p align="center">
+<img src="images/sumsquares2.svg" width="50%" onerror="this.src='images/sumsquares2.png'">
+</p>
+<!--/html preserve-->
+<p>Notamos que casi forman un cubo; de hecho, podemos pegar las pirámides para generar casi un cubo perfecto (excepto por un lado).</p>
+<!--html preserve-->
+<p align="center">
+<img src="images/sumsquares3.svg" width="50%" onerror="this.src='images/sumsquares3.png'">
+</p>
+<!--/html preserve-->
+<p>Notamos entonces que el volumen total de tres pirámides es el mismo que el de un prisma cuadrangular de volumen <span class="math inline">\(n^2 \cdot (n + 1)\)</span> y de una escalera (ver figura abajo). La escalera tiene una característica primordial: su volumen es la suma de los volúmenes de los cubos que la conforman y tenemos <span class="math inline">\(1\)</span> cubo para su primer piso, <span class="math inline">\(2\)</span> para el segundo, <span class="math inline">\(3\)</span> para el tercero por lo cual el volumen de dicha escalera coincide con la suma <span class="math inline">\(1 + 2 + 3 +\dots + n = \sum_{k=1}^{n} k\)</span> que ya calculamos previamente.</p>
+<!--html preserve-->
+<p align="center">
+<img src="images/sumsquares4.svg" width="50%" onerror="this.src='images/sumsquares4.png'">
+</p>
+<!--/html preserve-->
+De lo anterior concluimos que:
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+\textrm{Volumen de tres pirámides } &amp; = \underbrace{n \cdot (n+1)}_{\textrm{Prisma cuadrangular}} + \underbrace{\sum\limits_{k=1}^{n} k}_{\textrm{Escalera}}
+\\ &amp; = n^2 \cdot (n+1) + \frac{n(n+1)}{2} = n \big( n^2 + \frac{3}{2}n + \frac{1}{2} \big) = \frac{n}{2} (2n + 1) \cdot (n + 1),
+\end{aligned}
+\end{equation}\]</span>
+de donde se sigue que:
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{k=1}^{n} k^2 = \textrm{Volumen de una pirámide} = \frac{n \cdot (2n + 1) \cdot (n + 1)}{6} .
+\end{equation}\]</span>
+<p>Este proceso puede generalizarse a cualquier <span class="math inline">\(n\)</span>.</p>
+</div>
+<div id="suma-de-cubos" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Suma de cubos</h3>
+La suma de los primeros <span class="math inline">\(n\)</span> cubos es más fácil de ver geométricamente que la de los cuadrados. Evaluaremos la suma:
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{i=1}^{n} i^3
+\end{equation}\]</span>
+<p>Para ello consideramos los cubos literalmente como cubos geométricos formados (a su vez) por cubos unitarios. De esta forma la suma <span class="math inline">\(1 + 2^3 + 3^3 + 4^3 + \dots + n^3\)</span> la podemos interpretar como la suma de los volúmenes de cubos de lado respectivo <span class="math inline">\(1,2,3,4,\)</span> etcétera. Esto lo podemos representar en la siguiente figura:</p>
+<!--html preserve-->
+<p align="center">
+<img src="images/sumcubes1.svg" width="50%" onerror="this.src='images/sumcubes1.png'">
+</p>
+<!--/html preserve-->
+<p>El <em>truco</em> consiste en advertir que dichos cubos los podemos partir en capas</p>
+<!--html preserve-->
+<p align="center">
+<img src="images/sumcubes2.svg" width="50%" onerror="this.src='images/sumcubes2.png'">
+</p>
+<!--/html preserve-->
+<p>Y de nuevo armarlos como rompecabezas en un cuadrado gigante de longitud <span class="math inline">\(1 + 2 + 3 + \dots + n\)</span>:</p>
+<!--html preserve-->
+<p align="center">
+<img src="images/sumcubes3.svg" width="50%" onerror="this.src='images/sumcubes3.png'">
+</p>
+<!--/html preserve-->
+Por lo cual la suma de cubos es el cuadrado de la suma de enteros:
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{k = 1}^{n} k^3 = \Big( \sum\limits_{k=1}^{n} k \Big)^2 = \frac{n^2 (n+1)^2}{4}.
+\end{equation}\]</span>
+</div>
+</div>
 <div id="sumas-telescopicas" class="section level2">
-<h2><span class="header-section-number">4.1</span> Sumas telescópicas</h2>
+<h2><span class="header-section-number">3.2</span> Sumas telescópicas</h2>
 Las sumas telescópicas son sumas particulares que la gente encontró se resuelven fácilmente. Por poner un ejemplo (súuuper falso) consideremos la suma:
 <span class="math display">\[\begin{equation}\nonumber
 \sum\limits_{n = 1}^{3606201} \sqrt{n + 1} - \sqrt{n}
@@ -873,15 +972,15 @@ donde usamos la <a href='https://en.wikipedia.org/wiki/List_of_trigonometric_ide
 \begin{aligned}
 2 \sin \Big( \frac{\theta}{2} \Big) \mathcal{S}_k & = \sum\limits_{n = 0}^{k} \sin \Big( (n + \frac{1}{2})\theta \Big) - \sin \Big( (n - \frac{1}{2})\theta \Big) 
 \\ & = \Big( \sin \big( \frac{1}{2} \theta \big) - \sin \big( - \frac{1}{2}\theta \big) \Big) +  \Big( \sin \big( \frac{3}{2} \theta \big) - \sin \big( \frac{1}{2} \theta) \big) \Big) \\ & \qquad + \Big( \sin \big( \frac{5}{2}\theta \big) - \sin \big( \frac{3}{2}\theta )  \big) \Big) + \dots + \Big( \sin \big( (k + \frac{1}{2} )  \theta \big) - \sin \big( ( k - \frac{1}{2} )\theta \big) \Big) 
-\\ & =  \sin \big( (k + \frac{1}{2} )  \theta \big)  - \sin  (- \frac{1}{2} \theta)
+\\ & =  \sin \big( (k + \frac{1}{2} )  \theta \big)  - \sin  (- \frac{1}{2} \theta).
 \end{aligned}
 \end{equation}
-Finalmente, dividiendo por $2 \sin \Big( \frac{\theta}{2} \Big)$ (que sabemos es $\neq 0$ -pausa en lo que ves por qué-)
+Finalmente, al dividir por $2 \sin \Big( \frac{\theta}{2} \Big)$ (que sabemos es $\neq 0$ -pausa en lo que ves por qué-)
 \begin{equation}\nonumber
 \begin{aligned}
 \mathcal{S}_k & = \frac{\sin \big( (k + \frac{1}{2} )  \theta \big)}{2 \sin \Big( \frac{\theta}{2} \Big)}  - \frac{\sin  (- \frac{1}{2} \theta)}{2 \sin \Big( \frac{\theta}{2} \Big)} 
 \\ & = \frac{\sin \big( (k + \frac{1}{2} )  \theta \big)}{2 \sin \Big( \frac{\theta}{2} \Big)}  + \frac{\sin  ( \frac{1}{2} \theta)}{2 \sin \Big( \frac{\theta}{2} \Big)}
-\\ & = \frac{\sin \big( (k + \frac{1}{2} )  \theta \big)}{2 \sin \Big( \frac{\theta}{2} \Big)}  + \frac{1}{2}
+\\ & = \frac{\sin \big( (k + \frac{1}{2} )  \theta \big)}{2 \sin \Big( \frac{\theta}{2} \Big)}  + \frac{1}{2}.
 \end{aligned}
 \end{equation}
  
@@ -889,25 +988,25 @@ Finalmente, dividiendo por $2 \sin \Big( \frac{\theta}{2} \Big)$ (que sabemos es
 	</div>
 </div>
 
-<div id=" Nota0.777719063218683 " class="alert alert-info">
+<div id=" Nota0.640747009078041 " class="alert alert-info">
 <b> Nota : </b> En general una suma telescópica <span class="math inline">\(\sum\limits_{k= 1}^{n} a_k\)</span> con <span class="math inline">\(i &lt; n\)</span> tiene sumandos de la forma <span class="math inline">\(a_k = b_{k} - b_{k-1}\)</span> por lo que el valor al final de la suma es:
 <span class="math display">\[\begin{equation}\nonumber
 \sum\limits_{k = 1}^{n} a_i = b_{n} - b_{0}
 \end{equation}\]</span>
 pues
 <span class="math display">\[\begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} a_i = \sum\limits_{k = 1}^{n} [ b_k - b_{k-1} ] = [b_1 - b_0] + [b_2 - b_1] + [b_3 - b_2] + \dots + [b_n - b_{n-1}]
+\sum\limits_{k = 1}^{n} a_i = \sum\limits_{k = 1}^{n} [ b_k - b_{k-1} ] = [b_1 - b_0] + [b_2 - b_1] + [b_3 - b_2] + \dots + [b_n - b_{n-1}].
 \end{equation}\]</span>
 Por ejemplo en la suma: <span class="math inline">\(\sum_{k=1}^{12} k^3 - (k-1)^3\)</span> los <span class="math inline">\(a_k\)</span> son <span class="math inline">\(k^3 - (k-1)^k\)</span>, los <span class="math inline">\(b_k\)</span> son, respectivamente: <span class="math inline">\(b_{k} = k^3\)</span> y <span class="math inline">\(b_{k-1} = (k-1)^3\)</span> y <span class="math inline">\(n = 12\)</span>. El resultado de la suma es:
 <span class="math display">\[\begin{equation}\nonumber
-\sum_{k=1}^{12} k^3 - (k-1)^3 = \underbrace{12^3}_{b_n} - \underbrace{0^3}_{b_0} = 1728
+\sum_{k=1}^{12} k^3 - (k-1)^3 = \underbrace{12^3}_{b_n} - \underbrace{0^3}_{b_0} = 1728.
 \end{equation}\]</span>
 </div>
 <p>Como dato curioso (adicional) de acuerdo con <span class="citation">Neto (2017)</span> el nombre de sumas telescópicas se debe a que de la misma manera en que un telescopio acorta la distancia entre los orbes celestes y nuestros ojos, la suma telescópica reduce la distancia entre ciertas sumas y sus resultados (haciendo que sumemos menos).</p>
 <p>Las sumas telescópicas son súper poderosas. Muchas veces podemos transformar una suma que no es <em>nada obvio</em> que es telescópica en una telescópica [telescopiquear(?)] como muestra el siguiente ejemplo:</p>
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.469976954162121Telescopiqueando sumas class="panel-heading">
+	<div id =  Ejemplo0.706468188436702Telescopiqueando sumas class="panel-heading">
 		<h4> Ejemplo 13 [ Telescopiqueando sumas ] </h4>
 	</div>
 	<div class="panel-body">
@@ -919,7 +1018,7 @@ De nuevo consideremos la suma de los primeros $n$ números pero resolvámosla po
 </i>
 		<div class="well" style = "margin-top: 10px;">
 			 <b>Demostración:</b> 
-Los sumandos en esta suma son de la forma $a_k = k$ y los queremos escribir como $a_k = b_{k} - b_{k-1}$ para que quede telescópica. A priori no se me ocurren quiénes pueden ser esos $b_k$ pero podemos empezar proponiendo unos que nos den algo muy cercano. Lo que quiero es que los sumandos $b_k$ menos $b_{k-1}$ me den $k$ (o casi $k$). Una idea que se me ocurre es usar polinomios pues noto que:
+Los sumandos en esta suma son de la forma $a_k = k$ y los queremos escribir como $a_k = b_{k} - b_{k-1}$ para que quede telescópica. <i>A priori</i> no se me ocurren quiénes pueden ser esos $b_k$ pero podemos empezar proponiendo unos que nos den algo muy cercano. Lo que quiero es que los sumandos $b_k$ menos $b_{k-1}$ me den $k$ (o casi $k$). Una idea que se me ocurre es usar polinomios pues noto que:
 \begin{equation}\nonumber
 k^2 - (k-1)^2 = k^2 - k^2 + 2k - 1 =  2k - 1
 \end{equation}
@@ -933,12 +1032,12 @@ Aún no obtengo el $k$ pero ya estoy más cerca. Lo único que falta por hacer e
 \end{equation}
 ¡La situación no mejora! Entonces agregar el $-1/2$ a los términos no era la opción. Me quedo pensando un rato y me doy cuenta que si los términos $\beta_k$ tuvieran un $k$ entonces al restar $\beta_k - \beta_{k-1}$ se irían los $k$ y me quedaría sólo el $1$ (házlo y ve que no miento). Entonces se me ocurre escribir $\beta_k = \frac{k^2 + k}{2}$
 \begin{equation}\nonumber
-\frac{k^2 + k}{2} - \frac{(k-1)^2 + (k-1)}{2} = \frac{k^2 + k}{2} - \frac{k^2 - 2k + 1 + k - 1}{2} = k
+\frac{k^2 + k}{2} - \frac{(k-1)^2 + (k-1)}{2} = \frac{k^2 + k}{2} - \frac{k^2 - 2k + 1 + k - 1}{2} = k.
 \end{equation}
 Finalmente, propongo como $b_k = \frac{k^2 + k}{2}$. Reescribo entonces la suma como una telescópica:
 \begin{equation}\nonumber
 \sum\limits_{k = 1}^{n} k = \sum\limits_{k = 1}^{n} \underbrace{\left[ \frac{k^2 + k}{2} -  \frac{(k-1)^2 + (k-1)}{2} \right]}_{b_k - b_{k-1}} = 
- \underbrace{\frac{n^2 + n}{2}}_{b_n} -  \underbrace{\frac{0^2 + 0}{2} }_{b_0} = \frac{n(n+1)}{2}
+ \underbrace{\frac{n^2 + n}{2}}_{b_n} -  \underbrace{\frac{0^2 + 0}{2} }_{b_0} = \frac{n(n+1)}{2}.
 \end{equation}
 que era el resultado que obtuvimos antes.
  
@@ -946,86 +1045,12 @@ que era el resultado que obtuvimos antes.
 	</div>
 </div>
 
-<p>La moraleja del ejemplo anterior no es que es posible hallar una forma más complicada de resolver el mismo problema de antes sino que hay muchas sumas que son telescópicas “escondidas” y que la forma de verlo es “a ojo de buen cubero”.</p>
-</div>
-<div id="sumas-aritmeticas" class="section level2">
-<h2><span class="header-section-number">4.2</span> Sumas aritméticas</h2>
-Las sumas aritméticas pueden (de inicio) parecer poco útiles; empero veremos (ejemplos más adelante) que de hecho son bastante buenas. Una <strong>suma aritmética de primer orden</strong> es aquella donde la diferencia entre los sumandos es siempre la misma constante. Por poner un ejemplo considera la suma (que va sumando <span class="math inline">\(5\)</span> cada vez):
-<span class="math display">\[\begin{equation}\nonumber
-7 + 12 + 17 + 22 + 27 + 32 + \dots + 5552
-\end{equation}\]</span>
-Notamos que los sumandos, <span class="math inline">\(a_k\)</span> cumplen que <span class="math inline">\(a_{k+1} - a_k = 5\)</span>; es decir, la diferencia entre los sumandos siempre es la misma constante. Denotaremos la diferencia entre los sumandos como:
-<span class="math display">\[\begin{equation}\nonumber
-\Delta_{k}^{(1)} = a_{k} - a_{k-1} = 5.
-\end{equation}\]</span>
-(el <span class="math inline">\((1)\)</span> quedará claro más adelante cuando veamos sumas aritméticas de orden mayor). La observación importante es el análisis de cómo progresan los sumandos. Notamos que <span class="math inline">\(a_1 = 7\)</span> y de ahí <span class="math inline">\(a_2 = a_1 + 5\)</span> mientras que <span class="math inline">\(a_3 = a_2 + 5 = a_1 + 2 \cdot 5\)</span>, por otro lado, <span class="math inline">\(a_4 = a_3 + 5 = a_1 + 3 \cdot 5\)</span>; en general el <span class="math inline">\(k\)</span>-ésimo sumando lo podemos ver como:
-<span class="math display">\[\begin{equation}\nonumber
-a_k = a_1 + (k-1) \cdot \Delta_{k}^{(1)}
-\end{equation}\]</span>
-Usando esto podemos reescribir la suma original como:
-<span class="math display">\[\begin{equation}\nonumber
-\begin{aligned}
-\sum\limits_{k = 1}^{n} \Big(a_1 + (k-1) \cdot \Delta_{k}^{(1)} \Big) 
-   &amp; = \sum\limits_{k = 1}^{n} a_1 +\Delta_{k}^{(1)} \cdot \sum\limits_{k = 1}^{n} (k-1) 
-\\ &amp; = n \cdot a_1 + \Delta_{k}^{(1)} \cdot \underbrace{\sum\limits_{k = 1}^{n-1} k}_{\text{(verifica)}}
-\\ &amp; = n \cdot a_1 + \Delta_{k}^{(1)}\cdot \frac{(n-1)n}{2}
-\\ &amp; = \frac{n}{2}  \cdot \Big(2 a_1 + \Delta_{k}^{(1)} \cdot (n-1) \Big)
-\end{aligned}
-\end{equation}\]</span>
-Finalmente, notamos que el término <span class="math inline">\(a_n\)</span> está dado por: <span class="math inline">\(a_n = a_1 + (n-1) \Delta_{1}\)</span> y que <span class="math inline">\(a_1 + a_n = 2a_1 + (n-1)\Delta_{1}\)</span> por lo que podemos sustituir en la fórmula anterior y tener:
-<span class="math display">\[\begin{equation}\nonumber
-\begin{aligned}
-\sum\limits_{k = 1}^{n} \Big(a_1 + (k-1) \cdot \Delta_{k}^{(1)} \Big) &amp; =  \frac{n}{2}  \cdot \Big(2 a_1 + \Delta_{k}^{(1)} \cdot (n-1) \Big)
-\\ &amp; = \frac{n}{2} \cdot ( a_1 + a_n )
-\end{aligned}
-\end{equation}\]</span>
-En particular, en nuestro caso <span class="math inline">\(n = 1110\)</span> (-pausa en lo que compruebas-) <span class="math inline">\(a_n = 5552\)</span>, <span class="math inline">\(a_1 = 7\)</span> y <span class="math inline">\(\Delta_{k}^{(1)} = 5\)</span> por lo que:
-<span class="math display">\[\begin{equation}\nonumber
-7 + 12 + 17 + 22 + 27 + 32 + \dots + 5552 = \frac{1110}{2} \cdot \Big( 7 + 5552 \Big) = 3085245.
-\end{equation}\]</span>
-
-<div class="panel panel-success">
-	<div id =  Ejemplo0.0745447124354541  class="panel-heading">
-		<h4> Ejemplo 14 </h4>
-	</div>
-	<div class="panel-body">
-		<i>
-Consideremos la suma de los primeros $n$ números y resolvámosla como aritmética.
-\begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} k
-\end{equation}
-</i>
-		<div class="well" style = "margin-top: 10px;">
-			 <b>Demostración:</b> 
-Notamos que en esta suma los sumandos $a_k$ cumplen que $a_k - a_{k-1} = 1$ por lo que $\Delta^{(1)}_{k} = 1$. Podemos escribir entonces un sumando $a_k$ genérico como: $a_k = a_1 + (k-1) \Delta^{(1)}_{k}$ y por la misma lógica que el párrafo anterior tenemos que:
-\begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} k = \sum\limits_{k = 1}^{n} \left[ a_1 + (k-1) \Delta^{(1)}_{k} \right] = \frac{n}{2} \cdot ( a_1 + a_n ) =  \frac{n}{2} \cdot ( 1 + n ) 
-\end{equation}
-El cual es el resultado que ya conocíamos de antes. 
- 
-		</div>
-	</div>
-</div>
-
-Las sumas aritméticas de primer orden pueden parecer simples. Las más interesantes son las sumas de mayor orden. Consideremos un problema mucho más complicado: deducir la fórmula en términos de <span class="math inline">\(n\)</span> para la suma de cuadrados:
-<span class="math display">\[\begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} k^2
-\end{equation}\]</span>
-Notamos que en este caso los sumandos <span class="math inline">\(a_k\)</span> son de la forma: <span class="math inline">\(a_k = k^2\)</span>. Ésta no es una suma aritmética de primer orden pues la diferencia de los términos no es una constante:
-<span class="math display">\[\begin{equation}\nonumber
-\Delta_k^{(1)} = a_k - a_{k-1} = k^2 - (k-1)^2 = 2k - 1
-\end{equation}\]</span>
-¡Oh gran desgracia! Podemos sentarnos en un chayote a llorar o bien podemos analizar la diferencia de las diferencias:
-<span class="math display">\[\begin{equation}\nonumber
-\Delta_k^{(2)} = \Delta_k^{(1)} - \Delta_{k-1}^{(1)} = 2k - 1 - \Big( 2(k-1) - 1 \Big) = 2
-\end{equation}\]</span>
-<p>¡Esta sí es constante! (De hecho la suma es una <em>aritmética de segundo orden</em>). La pregunta entonces es ¿cómo usar que la diferencia de las diferencias es constante para resolver la suma?</p>
-<p>Sylverter</p>
+<p>La moraleja del ejemplo anterior es que hay muchas sumas que son telescópicas “escondidas” y que la forma de verlo es “a ojo de buen cubero”.</p>
 </div>
 <div id="sumas-geometricas" class="section level2">
-<h2><span class="header-section-number">4.3</span> Sumas geométricas</h2>
-<div id=" Advertencia0.449620126048103 " class="alert alert-warning">
-<b> Advertencia : </b> La suma geométrica será una de las más importantes de tu vida: no la pierdas de vista.
+<h2><span class="header-section-number">3.3</span> Sumas geométricas</h2>
+<div id=" Advertencia0.0465822073165327 " class="alert alert-warning">
+<b> Advertencia : </b> La suma geométrica será una de las más importantes de tu vida, no la pierdas de vista.
 </div>
 Imagina que tienes un coche que inicialmente costó <span class="math inline">\(P\)</span> y que año con año se devalúa un <span class="math inline">\(s \cdot 100\%\)</span>; es decir tras su devaluación el precio al primer año será <span class="math inline">\(P - s P\)</span>; en el segundo año será <span class="math inline">\(P - s P - s \cdot s P\)</span>; en el tercero: <span class="math inline">\(P - s P - s^2 P - s \cdot s^2 P\)</span>, etcétera. El precio del coche al año <span class="math inline">\(n\)</span> lo podemos escribir como:
 <span class="math display">\[\begin{equation}\nonumber
@@ -1050,7 +1075,7 @@ s \mathcal{S} &amp; = s \Big( s + s^2 + s^3 + \dots + s^n \Big)
 Pasando el <span class="math inline">\(s\mathcal{S}\)</span> del otro lado:
 <span class="math display">\[\begin{equation}\nonumber
 \begin{aligned}
-&amp; \mathcal{S} -  s \mathcal{S} &amp; = s - s^{n+1} 
+&amp; \mathcal{S} -  s \mathcal{S} &amp; = s - s^{n+1}  \\
 \Rightarrow &amp; (1 - s) \mathcal{S} &amp; = s - s^{n+1} 
 \end{aligned}
 \end{equation}\]</span>
@@ -1065,7 +1090,7 @@ El caso en el que <span class="math inline">\(s = 1\)</span> es trivial (lo pode
 <p>Llegamos entonces al siguiente teorema:</p>
 
 <div class="panel panel-primary">
-	<div id =  Teorema0.468502811389044Suma geométrica class="panel-heading">
+	<div id =  Teorema0.233635938260704Suma geométrica class="panel-heading">
 		<h4> Teorema 3 [ Suma geométrica ] </h4>
 	</div>
 	<div class="panel-body">
@@ -1084,7 +1109,7 @@ n & \textrm{ si } s = 1.
 	</div>
 </div>
 
-<div id=" Nota0.55689967609942 " class="alert alert-info">
+<div id=" Nota0.294146311236545 " class="alert alert-info">
 <b> Nota : </b> Los valores de la serie geométrica dependen de tu valor inicial. En el teorema anterior empezamos desde <span class="math inline">\(1\)</span>; sin embargo, si hubiéramos empezado en <span class="math inline">\(0\)</span> tendríamos que:
 <span class="math display">\[\begin{equation}\nonumber
 \begin{aligned}
@@ -1115,8 +1140,8 @@ P\Big( 1 - \sum\limits_{k = 1}^{n} s^k \Big) = P \Big( 1 - \frac{s - s^{n+1}}{1 
 <p>siempre y cuando la depreciación del coche sea menor al <span class="math inline">\(100\%\)</span> (<em>i.e.</em> <span class="math inline">\(s = 1\)</span>).</p>
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.718918563332409  class="panel-heading">
-		<h4> Ejemplo 15 </h4>
+	<div id =  Ejemplo0.945522364694625  class="panel-heading">
+		<h4> Ejemplo 14 </h4>
 	</div>
 	<div class="panel-body">
 		<i>
@@ -1146,7 +1171,7 @@ e identificar que es una geométrica con parámetros $r = \frac{1}{3}$, $n = 122
 
 <div class="panel panel-success">
 	<div id =  trucoderivada class="panel-heading">
-		<h4> Ejemplo 16 [ Truco de la derivada ] </h4>
+		<h4> Ejemplo 15 [ Truco de la derivada ] </h4>
 	</div>
 	<div class="panel-body">
 		<i>
@@ -1199,7 +1224,7 @@ De todo lo anterior concluimos que:
 </div>
 
 <div id="solucion-al-problema-del-interes-compuesto" class="section level3">
-<h3><span class="header-section-number">4.3.1</span> Solución al problema del interés compuesto</h3>
+<h3><span class="header-section-number">3.3.1</span> Solución al problema del interés compuesto</h3>
 Ahora que somos muy buenos en la evaluación de sumas, recordemos la planteada al inicio:
 <span class="math display">\[\begin{equation}\nonumber
     S_n = P + (1 + k) P + (1 + k)^2 P +  (1 + k)^3 P  + \dots +  (1 + k)^{n-2} P + (1 + k)^{n-1} P
@@ -1233,68 +1258,159 @@ Nota que el resultado que da <a href="https://www.wolframalpha.com/input/?i=sum+
     \Rightarrow &amp; P &amp;&amp; = \frac{50000}{\Big( \frac{(1 + 0.05)^{60}}{0.05} - \frac{1}{0.05} \Big)} \approx 141.41
 \end{aligned}
 \end{equation}\]</span>
-<!--## Sumas desde la perspectiva probabilista-->
 </div>
 </div>
-</div>
-<div id="otros-trucos-para-sumar" class="section level1">
-<h1><span class="header-section-number">5</span> Otros trucos para sumar</h1>
-<p>En esta sección presento algunos “trucos” que son útiles para sumar y que no necesariamente caben dentro de las categorías anteriores. Estos “trucos” están presentados como ejemplos particulares para dar una mejor idea de cómo se utilizan.</p>
-<div id="reordenar-la-suma" class="section level2">
-<h2><span class="header-section-number">5.1</span> Reordenar la suma</h2>
-<p>La idea del ‘truco’ es reescribir la suma de otra forma y ver si a partir de eso podemos resolver. De nuevo tomaremos nuestro ejemplo favorito, la suma de los primeros enteros <span class="math inline">\(\sum_{k=1}^{n} k\)</span> y veremos cómo se resolvería bajo esta forma.</p>
+<div id="sumas-aritmeticas" class="section level2">
+<h2><span class="header-section-number">3.4</span> Sumas aritméticas</h2>
+Las sumas aritméticas pueden (de inicio) parecer poco útiles; empero veremos (ejemplos más adelante) que de hecho son bastante buenas. Una <strong>suma aritmética de primer orden</strong> es aquella donde la diferencia entre los sumandos es siempre la misma constante. Por poner un ejemplo considera la suma (que va sumando <span class="math inline">\(5\)</span> cada vez):
+<span class="math display">\[\begin{equation}\nonumber
+7 + 12 + 17 + 22 + 27 + 32 + \dots + 5552
+\end{equation}\]</span>
+Notamos que los sumandos, <span class="math inline">\(a_k\)</span> cumplen que <span class="math inline">\(a_{k+1} - a_k = 5\)</span>; es decir, la diferencia entre los sumandos siempre es la misma constante. Denotaremos la diferencia entre los sumandos como:
+<span class="math display">\[\begin{equation}\nonumber
+\Delta_{k}^{(1)} = a_{k} - a_{k-1} = 5.
+\end{equation}\]</span>
+(el <span class="math inline">\((1)\)</span> quedará claro más adelante cuando veamos sumas aritméticas de orden mayor). La observación importante es el análisis de cómo progresan los sumandos. Notamos que <span class="math inline">\(a_1 = 7\)</span> y de ahí <span class="math inline">\(a_2 = a_1 + 5\)</span> mientras que <span class="math inline">\(a_3 = a_2 + 5 = a_1 + 2 \cdot 5\)</span>, por otro lado, <span class="math inline">\(a_4 = a_3 + 5 = a_1 + 3 \cdot 5\)</span>; en general el <span class="math inline">\(k\)</span>-ésimo sumando lo podemos ver como:
+<span class="math display">\[\begin{equation}\nonumber
+a_k = a_1 + (k-1) \cdot \Delta_{k}^{(1)}
+\end{equation}\]</span>
+Usando esto podemos reescribir la suma original como:
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+\sum\limits_{k = 1}^{n} \Big(a_1 + (k-1) \cdot \Delta_{k}^{(1)} \Big) 
+   &amp; = \sum\limits_{k = 1}^{n} a_1 +\Delta_{k}^{(1)} \cdot \sum\limits_{k = 1}^{n} (k-1) 
+\\ &amp; = n \cdot a_1 + \Delta_{k}^{(1)} \cdot \underbrace{\sum\limits_{k = 1}^{n-1} k}_{\text{(verifica)}}
+\\ &amp; = n \cdot a_1 + \Delta_{k}^{(1)}\cdot \frac{(n-1)n}{2}
+\\ &amp; = \frac{n}{2}  \cdot \Big(2 a_1 + \Delta_{k}^{(1)} \cdot (n-1) \Big)
+\end{aligned}
+\end{equation}\]</span>
+Finalmente, notamos que el término <span class="math inline">\(a_n\)</span> está dado por: <span class="math inline">\(a_n = a_1 + (n-1) \Delta_{1}\)</span> y que <span class="math inline">\(a_1 + a_n = 2a_1 + (n-1)\Delta_{1}\)</span> por lo que podemos sustituir en la fórmula anterior y tener:
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+\sum\limits_{k = 1}^{n} \Big(a_1 + (k-1) \cdot \Delta_{k}^{(1)} \Big) &amp; =  \frac{n}{2}  \cdot \Big(2 a_1 + \Delta_{k}^{(1)} \cdot (n-1) \Big)
+\\ &amp; = \frac{n}{2} \cdot ( a_1 + a_n )
+\end{aligned}
+\end{equation}\]</span>
+En particular, en nuestro caso <span class="math inline">\(n = 1110\)</span> (-pausa en lo que compruebas-) <span class="math inline">\(a_n = 5552\)</span>, <span class="math inline">\(a_1 = 7\)</span> y <span class="math inline">\(\Delta_{k}^{(1)} = 5\)</span> por lo que:
+<span class="math display">\[\begin{equation}\nonumber
+7 + 12 + 17 + 22 + 27 + 32 + \dots + 5552 = \frac{1110}{2} \cdot \Big( 7 + 5552 \Big) = 3085245.
+\end{equation}\]</span>
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.0526988646015525Reescribir la suma class="panel-heading">
-		<h4> Ejemplo 17 [ Reescribir la suma ] </h4>
+	<div id =  Ejemplo0.638612603768706  class="panel-heading">
+		<h4> Ejemplo 16 </h4>
 	</div>
 	<div class="panel-body">
 		<i>
-De nuevo vamos a considerar la suma de los primeros $n$ enteros:
+Consideremos la suma de los primeros $n$ números y resolvámosla como aritmética.
 \begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} k 
+\sum\limits_{k = 1}^{n} k
 \end{equation}
-e intentemos escribirla en términos de $n$.  
 </i>
 		<div class="well" style = "margin-top: 10px;">
 			 <b>Demostración:</b> 
-Tenemos que la suma:
+Notamos que en esta suma los sumandos $a_k$ cumplen que $a_k - a_{k-1} = 1$ por lo que $\Delta^{(1)}_{k} = 1$. Podemos escribir entonces un sumando $a_k$ genérico como: $a_k = a_1 + (k-1) \Delta^{(1)}_{k}$ y por la misma lógica que el párrafo anterior tenemos que:
 \begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} k  = 1 + 2 + 3 + \dots + n
+\sum\limits_{k = 1}^{n} k = \sum\limits_{k = 1}^{n} \left[ a_1 + (k-1) \Delta^{(1)}_{k} \right] = \frac{n}{2} \cdot ( a_1 + a_n ) =  \frac{n}{2} \cdot ( 1 + n ) 
 \end{equation}
-la podemos reescribir (al revés) como:
-\begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} (n - k + 1)  = n + (n-1) + (n-2) + \dots + 1
-\end{equation}
-(-pausa en lo que verificas la afirmación anterior-)
-Tenemos entonces que:
-\begin{equation}\nonumber
-\begin{aligned}
-\sum\limits_{k = 1}^{n} k & = \sum\limits_{k = 1}^{n} (n - k + 1) 
-\\ & = \sum\limits_{k = 1}^{n} n - \sum\limits_{k = 1}^{n}  k + \sum\limits_{k = 1}^{n} 1
-\\ & = n \cdot n - \Big( \sum\limits_{k = 1}^{n}  k \Big) + n
-\end{aligned}
-\end{equation}
-donde podemos pasar la suma del lado derecho sumando:
-\begin{equation}\nonumber
-\begin{aligned}
-& 2 \sum\limits_{k = 1}^{n} k & = n^2 + n = n(n+1)
-\\ \Rightarrow & \sum\limits_{k = 1}^{n} k & = \frac{n(n+1)}{2}.
-\end{aligned}
-\end{equation}
+El cual es el resultado que ya conocíamos de antes. 
  
+		</div>
+	</div>
+</div>
+
+Las sumas aritméticas de primer orden pueden parecer simples. Las más interesantes son las sumas de mayor orden. Consideremos un problema mucho más complicado: deducir la fórmula en términos de <span class="math inline">\(n\)</span> para la suma de cuadrados de impares:
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{k = 0}^{n} (2k + 1)^2
+\end{equation}\]</span>
+Notamos que en este caso los sumandos <span class="math inline">\(a_k\)</span> son de la forma: <span class="math inline">\(a_k = (2k + 1)^2\)</span>. Ésta no es una suma aritmética de primer orden pues la diferencia de los términos no es una constante:
+<span class="math display">\[\begin{equation}\nonumber
+\Delta_k^{(1)} = a_k - a_{k-1} = (2k + 1)^2 - \big(2(k-1) + 1\big)^2 = 8k
+\end{equation}\]</span>
+¡Oh gran desgracia! Podemos sentarnos en un chayote a llorar o bien podemos analizar la diferencia de las diferencias:
+<span class="math display">\[\begin{equation}\nonumber
+\Delta_k^{(2)} = \Delta_k^{(1)} - \Delta_{k-1}^{(1)} = 8k - 8(k-1) = 8
+\end{equation}\]</span>
+<p>¡Esta sí es constante! (De hecho la suma es una <em>aritmética de segundo orden</em>; de manera general una suma es <em>aritmética de orden <span class="math inline">\(j\)</span></em> si la suma de la <span class="math inline">\(j\)</span>-ésima diferencia de diferencias es constante). La pregunta entonces es ¿cómo usar que la diferencia de las diferencias es constante para resolver la suma? (-no sé tú, yo saqué una hoja para ponerme a explorar cómo podría hacerse-)</p>
+Analizamos los sumandos de la serie (nota que empieza en <span class="math inline">\(k = 0\)</span>) y vemos cómo se ven las diferencias (renglón de abajo):
+<span class="math display">\[\begin{equation}\nonumber
+1, 9, 25, 49, 81, 121, \dots, (2n+1)^2
+\end{equation}\]</span>
+Las diferencias entre términos (las <span class="math inline">\(\Delta_k^{(1)} = 8k\)</span>), incluyendo el primer término, son:
+<span class="math display">\[\begin{equation}\nonumber
+1, 8, 16, 24, 32, 40, \dots, 8n
+\end{equation}\]</span>
+Nota que los sumandos de la serie original los podemos escribir en términos de ésta (que es aritmética de primer orden):
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+1 &amp; = 1 \\
+9 &amp; = 1 + 8 \\
+25 &amp; = 1 + 8 + 16 \\
+49 &amp; = 1 + 8 + 16 + 24 \\
+81 &amp; = 1 + 8 + 16 + 24 + 32\\
+121 &amp; = 1 + 8 + 16 + 24 + 32 + 40 \\
+\vdots &amp; = \ddots \\
+(2n+1)^2 &amp; =1 + 8 + 16 + 24 + 32 + 40 + \dots + 8(n-1)
+\end{aligned}
+\end{equation}\]</span>
+O bien escrito con la notación de suma:
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+1 &amp; = 1 + \sum\limits_{k=0}^{0} 8k \\
+9 &amp; = 1 + \sum\limits_{k=0}^{1} 8k\\
+25 &amp; = 1 + \sum\limits_{k=0}^{2} 8k \\
+49 &amp; = 1 + \sum\limits_{k=0}^{3} 8k \\
+81 &amp; = 1 + \sum\limits_{k=0}^{4} 8k \\
+121 &amp; = 1 + \sum\limits_{k=0}^{5} 8k \\
+\vdots &amp; = \vdots \\
+(2n+1)^2 &amp; = 1 + \sum\limits_{k=1}^{n-1} 8k
+\end{aligned}
+\end{equation}\]</span>
+Por lo que podemos ver la suma <span class="math inline">\(\sum_{k = 1}^{n} (2k+1)^2 = 1 + 9 + 25 + 49 + \dots + (2n+1)^2\)</span> como una suma de sumas (propiamente, una suma doble):
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+\sum\limits_{k = 0}^{n} (2k+1)^2 &amp; =  \sum\limits_{j = 1}^{n} \Big[ 1 + \sum\limits_{k = 0}^{j-1} 8k \Big] \\
+&amp; =  \sum\limits_{j = 1}^{n} \Big[ 1 + 8 \sum\limits_{k = 0}^{j-1} k \Big] \\
+&amp; =  \sum\limits_{j = 1}^{n} \Big[ 1 + 4 (j-1) \cdot j \Big] \\
+&amp; =  \sum\limits_{j = 1}^{n}  1 + 4 \sum\limits_{j = 1}^{n} \Big[ (j-1) \cdot j \Big] \\
+&amp; =  n + 4 \sum\limits_{j = 1}^{n} \Big[ j^2 - j \Big] \\
+&amp; =  n + 4 \Bigg[ \sum\limits_{j = 1}^{n} j^2 -  \sum\limits_{j = 1}^{n} j\Bigg] \\
+&amp; =  n + 4 \Bigg[ \frac{n(n+1)(2n+1)}{6} -   \frac{n(n+1)}{2}\Bigg] \\
+&amp; =  n + 4n(n+1) \Bigg[ \frac{(2n+1)}{6} -   \frac{1}{2}\Bigg] \\
+&amp; =  n + 4n(n+1) \Bigg[ \frac{n}{3} + \frac{1}{6} -   \frac{3}{6}\Bigg] \\
+&amp; =  n + 4n(n+1) \Bigg[ \frac{n}{3}  -   \frac{1}{3}\Bigg] \\
+&amp; =  n + \frac{4}{3} n(n+1)(n-1) \\
+&amp; =  n \big[1 + \frac{4}{3}(n+1)(n-1)\big] \\
+&amp; =  \frac{n(2n + 1)(2n-1)}{3} \\
+\end{aligned}
+\end{equation}\]</span>
+<p>De donde concluimos el siguiente teorema de la suma de cuadrados de impares:</p>
+
+<div class="panel panel-primary">
+	<div id =  Teorema0.0791992645245045Suma de cuadrados de los primeros $n$ impares class="panel-heading">
+		<h4> Teorema 4 [ Suma de cuadrados de los primeros $n$ impares ] </h4>
+	</div>
+	<div class="panel-body">
+		<i>
+La suma de cuadrados de los primeros $n$ impares está dada por:
+\begin{equation}\nonumber
+\sum\limits_{k = 1}^{n} (2k + 1)^2 = \frac{n(2n + 1)(2n-1)}{3}
+\end{equation}
+</i>
+		<div class="well" style = "margin-top: 10px;">
+			 <b>Demostración:</b> Todo lo anterior. 
 		</div>
 	</div>
 </div>
 
 </div>
 <div id="usar-sumas-dobles" class="section level2">
-<h2><span class="header-section-number">5.2</span> Usar sumas dobles</h2>
+<h2><span class="header-section-number">3.5</span> Usar sumas dobles</h2>
 <p>Este truco puede parecer una insensatez pues consiste en escribir una suma que no sabemos resolver como dos sumas; empero, el propósito de todo esto es que las dos sumas sean más sencillas y las sepamos resolver. Veamos cómo funciona:</p>
 
 <div class="panel panel-success">
 	<div id =  doblesuma class="panel-heading">
-		<h4> Ejemplo 18 [ Usar doble suma ] </h4>
+		<h4> Ejemplo 17 [ Usar doble suma ] </h4>
 	</div>
 	<div class="panel-body">
 		<i>
@@ -1340,7 +1456,7 @@ Donde evaluamos la suma interior:
 Sustituyendo éste valor para la suma interior en la doble suma tenemos que:
 \begin{equation}\nonumber
 \begin{aligned}
-\sum\limits_{i = 1}^{n} \sum\limits_{k = i}^{n} 2^k & = \sum\limits_{i = 1}^{n} 2^{n+1} - 2^{i}
+\sum\limits_{i = 1}^{n} \sum\limits_{k = i}^{n} 2^k & = \sum\limits_{i = 1}^{n} \Big[ 2^{n+1} - 2^{i} \Big]
 \\ & = \sum\limits_{i = 1}^{n} 2^{n+1} - \sum\limits_{i = 1}^{n}  2^{i}
 \\ & = n 2^{n+1} - \underbrace{ \sum\limits_{i = 1}^{n}  2^{i} }_{\text{Geométrica}}
 \\ & = n 2^{n+1} - \big( 2^{n+1} - 2 \big)
@@ -1360,8 +1476,8 @@ Nota (no es trivial verlo pero después de cálculos sale) que el resultado de e
 <p>En particular, usar sumas dobles es bastante útil para hacer sumas de enteros elevados a una potencia entera. Es decir, sumas de la forma: <span class="math inline">\(\sum\limits_{k=1}^{n} k^m\)</span> donde <span class="math inline">\(m\)</span> es un entero salen con sumas dobles. Veamos un ejemplo:</p>
 
 <div class="panel panel-success">
-	<div id =  Ejemplo0.111663099611178Suma de cuadrados class="panel-heading">
-		<h4> Ejemplo 19 [ Suma de cuadrados ] </h4>
+	<div id =  Ejemplo0.303406650666147Suma de cuadrados class="panel-heading">
+		<h4> Ejemplo 18 [ Suma de cuadrados ] </h4>
 	</div>
 	<div class="panel-body">
 		<i>
@@ -1424,102 +1540,54 @@ Multiplicando por $\frac{2}{3}$ ambos lados obtenemos:
 </div>
 
 </div>
-<div id="sumas-como-areas-o-volumenes" class="section level2">
-<h2><span class="header-section-number">5.3</span> Sumas como áreas o volúmenes</h2>
-<div id="suma-de-los-primeros-n-enteros" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Suma de los primeros <span class="math inline">\(n\)</span> enteros</h3>
-Uno de los trucos más interesantes para una suma es verla desde una perspectiva geométrica como área o volumen. Para poner un ejemplo de lo que quiero decir, considera de nuevo la suma de los primeros <span class="math inline">\(n\)</span> enteros.
-<span class="math display">\[\begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} k = 1 + 2 + \dots + n
-\end{equation}\]</span>
-<p>La suma de los primeros <span class="math inline">\(n\)</span> enteros es equivalente al área generada por <span class="math inline">\(\sum_{k = 1}^{n} k\)</span> cuadrados de longitud <span class="math inline">\(1\)</span>. El chiste de todo es saber cómo acomodar esos cuadrados. Por simplificar la idea, consideremos <span class="math inline">\(n = 10\)</span> y supongamos queremos calcular la suma <span class="math inline">\(1 + 2 + \dots + 10\)</span> (que ya sabemos es <span class="math inline">\(55\)</span>). Una forma de acomodar los cuadrados para que vayan ad-hoc con la suma es como una pirámide alineada a la izquierda:</p>
-<p><img src="Sumas_1_files/figure-html/unnamed-chunk-31-1.png" width="384" style="display: block; margin: auto;" /></p>
-<p>Nota que el área de la pirámide es relativamente fácil de calcular pues es un triángulo (pirámide grande) unido a <span class="math inline">\(10\)</span> triangulitos (ver figura abajo). El triángulo grande mide de base <span class="math inline">\(10\)</span> y de altura <span class="math inline">\(10\)</span> por lo que su área es <span class="math inline">\(10 \times 10 / 2 = 50\)</span> mientras que los pequeños como vienen de cuadrados que miden <span class="math inline">\(1\)</span> cada uno de ellos mide <span class="math inline">\(1/2\)</span> y por tanto los <span class="math inline">\(10\)</span> triangulitos tienen área (conjunta) de <span class="math inline">\(5\)</span> por lo que el área total de la pirámide es <span class="math inline">\(55\)</span> y por lo tanto la suma es <span class="math inline">\(55\)</span>.</p>
-<p><img src="Sumas_1_files/figure-html/unnamed-chunk-32-1.png" width="384" style="display: block; margin: auto;" /></p>
-<p>Este mismo argumento se puede hacer para la suma de <span class="math inline">\(n\)</span> enteros considerando triángulos más grandes:</p>
-<p><img src="Sumas_1_files/figure-html/unnamed-chunk-33-1.png" width="384" style="display: block; margin: auto;" /></p>
-La fórmula general será:
-<span class="math display">\[\begin{equation}\nonumber
-\text{Área del grande} + n \cdot \text{Área de los pequeños} = \frac{n \times n}{2} + n \frac{1}{2} = \frac{n(n+1)}{2}
-\end{equation}\]</span>
-<p>de donde obtenemos el mismo resultado que ya teníamos pero por otro camino. ¡Genial!</p>
-</div>
-<div id="suma-de-cuadrados" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Suma de cuadrados</h3>
-Para la suma de cuadrados, una opción (presentada por <span class="citation">Siu (1984)</span>) es considerar pirámides de cubos unitarios donde el número de cubos en cada piso corresponde con el entero al cuadrado. Así en el primer piso habrá <span class="math inline">\(1^2 = 1\)</span> cubo; en el segundo piso, <span class="math inline">\(2^2 = 4\)</span> cubos; en el tercero, <span class="math inline">\(3^2 = 9\)</span> cubos y así sucesivamente (ver figura abajo). El volumen de la pirámide debería corresponder con la suma de cuadrados:
-<span class="math display">\[\begin{equation}\nonumber
-1^2 + 2^2 + 3^2 + \dots + n^2 = \sum\limits_{k = 1}^{n} k^2.
-\end{equation}\]</span>
-<!--html preserve-->
-<p align="center">
-<img src="images/sumsquares1.svg" width="50%" onerror="this.src='images/sumsquares1.png'">
-</p>
-<!--/html preserve-->
-<p>A mí de la pirámide no se me ocurre que hacer; empero, podemos generar 3 pirámides idénticas sólo que rotadas y trasladadas para armar una especie de rompecabezas con ellas:</p>
-<!--html preserve-->
-<p align="center">
-<img src="images/sumsquares2.svg" width="50%" onerror="this.src='images/sumsquares2.png'">
-</p>
-<!--/html preserve-->
-<p>Notamos que casi forman un cubo; de hecho, podemos pegar las pirámides para generar casi un cubo perfecto (excepto por un lado).</p>
-<!--html preserve-->
-<p align="center">
-<img src="images/sumsquares3.svg" width="50%" onerror="this.src='images/sumsquares3.png'">
-</p>
-<!--/html preserve-->
-<p>Notamos entonces que el volumen total de tres pirámides es el mismo que el de un prisma cuadrangular de volumen <span class="math inline">\(n^2 \cdot (n + 1)\)</span> y de una escalera (ver figura abajo). La escalera tiene una característica primordial: su volumen es la suma de los volúmenes de los cubos que la conforman y tenemos <span class="math inline">\(1\)</span> cubo para su primer piso, <span class="math inline">\(2\)</span> para el segundo, <span class="math inline">\(3\)</span> para el tercero por lo cual el volumen de dicha escalera coincide con la suma <span class="math inline">\(1 + 2 + 3 +\dots + n = \sum_{k=1}^{n} k\)</span> que ya calculamos previamente.</p>
-<!--html preserve-->
-<p align="center">
-<img src="images/sumsquares4.svg" width="50%" onerror="this.src='images/sumsquares4.png'">
-</p>
-<!--/html preserve-->
-De lo anterior concluimos que:
-<span class="math display">\[\begin{equation}\nonumber
+<div id="reordenar-la-suma" class="section level2">
+<h2><span class="header-section-number">3.6</span> Reordenar la suma</h2>
+<p>La idea del ‘truco’ es reescribir la suma de otra forma y ver si a partir de eso podemos resolver. De nuevo tomaremos nuestro ejemplo favorito, la suma de los primeros enteros <span class="math inline">\(\sum_{k=1}^{n} k\)</span> y veremos cómo se resolvería bajo esta forma.</p>
+
+<div class="panel panel-success">
+	<div id =  Ejemplo0.613229650305584Reescribir la suma class="panel-heading">
+		<h4> Ejemplo 19 [ Reescribir la suma ] </h4>
+	</div>
+	<div class="panel-body">
+		<i>
+De nuevo vamos a considerar la suma de los primeros $n$ enteros:
+\begin{equation}\nonumber
+\sum\limits_{k = 1}^{n} k 
+\end{equation}
+e intentemos escribirla en términos de $n$.  
+</i>
+		<div class="well" style = "margin-top: 10px;">
+			 <b>Demostración:</b> 
+Tenemos que la suma:
+\begin{equation}\nonumber
+\sum\limits_{k = 1}^{n} k  = 1 + 2 + 3 + \dots + n
+\end{equation}
+la podemos reescribir (al revés) como:
+\begin{equation}\nonumber
+\sum\limits_{k = 1}^{n} (n - k + 1)  = n + (n-1) + (n-2) + \dots + 1
+\end{equation}
+(-pausa en lo que verificas la afirmación anterior-)
+Tenemos entonces que:
+\begin{equation}\nonumber
 \begin{aligned}
-\textrm{Volumen de tres pirámides } &amp; = \underbrace{n \cdot (n+1)}_{\textrm{Prisma cuadrangular}} + \underbrace{\sum\limits_{k=1}^{n} k}_{\textrm{Escalera}}
-\\ &amp; = n^2 \cdot (n+1) + \frac{n(n+1)}{2} = n \big( n^2 + \frac{3}{2}n + \frac{1}{2} \big) = \frac{n}{2} (2n + 1) \cdot (n + 1),
+\sum\limits_{k = 1}^{n} k & = \sum\limits_{k = 1}^{n} (n - k + 1) 
+\\ & = \sum\limits_{k = 1}^{n} n - \sum\limits_{k = 1}^{n}  k + \sum\limits_{k = 1}^{n} 1
+\\ & = n \cdot n - \Big( \sum\limits_{k = 1}^{n}  k \Big) + n
 \end{aligned}
-\end{equation}\]</span>
-de donde se sigue que:
-<span class="math display">\[\begin{equation}\nonumber
-\sum\limits_{k=1}^{n} k^2 = \textrm{Volumen de una pirámide} = \frac{n \cdot (2n + 1) \cdot (n + 1)}{6} .
-\end{equation}\]</span>
-<p>Este proceso puede generalizarse a cualquier <span class="math inline">\(n\)</span>, por ejemplo, las pirámides para <span class="math inline">\(n = 12\)</span> son:</p>
-<!--html preserve-->
-<p align="center">
-<img src="images/sumsquares5.svg" width="50%" onerror="this.src='images/sumsquares5.png'">
-</p>
-<!--/html preserve-->
+\end{equation}
+donde podemos pasar la suma del lado derecho sumando:
+\begin{equation}\nonumber
+\begin{aligned}
+& 2 \sum\limits_{k = 1}^{n} k & = n^2 + n = n(n+1)
+\\ \Rightarrow & \sum\limits_{k = 1}^{n} k & = \frac{n(n+1)}{2}.
+\end{aligned}
+\end{equation}
+ 
+		</div>
+	</div>
 </div>
-<div id="suma-de-cubos" class="section level3">
-<h3><span class="header-section-number">5.3.3</span> Suma de cubos</h3>
-La suma de los primeros <span class="math inline">\(n\)</span> cubos es más fácil de ver geométricamente que la de los cuadrados. Evaluaremos la suma:
-<span class="math display">\[\begin{equation}\nonumber
-\sum\limits_{i=1}^{n} i^3
-\end{equation}\]</span>
-<p>Para ello consideramos los cubos literalmente como cubos geométricos formados (a su vez) por cubos unitarios. De esta forma la suma <span class="math inline">\(1 + 2^3 + 3^3 + 4^3 + \dots + n^3\)</span> la podemos interpretar como la suma de los volúmenes de cubos de lado respectivo <span class="math inline">\(1,2,3,4,\)</span> etcétera. Esto lo podemos representar en la siguiente figura:</p>
-<!--html preserve-->
-<p align="center">
-<img src="images/sumcubes1.svg" width="50%" onerror="this.src='images/sumcubes1.png'">
-</p>
-<!--/html preserve-->
-<p>El <em>truco</em> consiste en advertir que dichos cubos los podemos partir en capas</p>
-<!--html preserve-->
-<p align="center">
-<img src="images/sumcubes2.svg" width="50%" onerror="this.src='images/sumcubes2.png'">
-</p>
-<!--/html preserve-->
-<p>Y de nuevo armarlos como rompecabezas en un cuadrado gigante de longitud <span class="math inline">\(1 + 2 + 3 + \dots + n\)</span>:</p>
-<!--html preserve-->
-<p align="center">
-<img src="images/sumcubes3.svg" width="50%" onerror="this.src='images/sumcubes3.png'">
-</p>
-<!--/html preserve-->
-Por lo cual la suma de cubos es el cuadrado de la suma de enteros:
-<span class="math display">\[\begin{equation}\nonumber
-\sum\limits_{k = 1}^{n} k^3 = \Big( \sum\limits_{k=1}^{n} k \Big)^2 = \frac{n^2 (n+1)^2}{4}.
-\end{equation}\]</span>
-<div id=" Advertencia0.135798891307786 " class="alert alert-warning">
+
+<div id=" Advertencia0.907271454110742 " class="alert alert-warning">
 <b> Advertencia : </b> Como (espero hayas notado) no hay una sóla única forma de encontrar valores de sumas; en general éste es un proceso creativo. Para resolver problemas de sumas te sugiero lo siguiente:
 <ol>
 <li>
@@ -1544,14 +1612,13 @@ Intenta reducir la suma a una conocida: una telescópica, una aritmética o una 
 </div>
 </div>
 </div>
-</div>
 <div id="aplicaciones" class="section level1">
-<h1><span class="header-section-number">6</span> Aplicaciones</h1>
+<h1><span class="header-section-number">4</span> Aplicaciones</h1>
 <div id="valor-presente-del-flujo-de-caja" class="section level2">
-<h2><span class="header-section-number">6.1</span> Valor presente del flujo de caja</h2>
+<h2><span class="header-section-number">4.1</span> Valor presente del flujo de caja</h2>
 <p>Para esta aplicación primero tenemos que definir unos conceptos:</p>
 <div id="interes-compuesto" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> Interés compuesto</h3>
+<h3><span class="header-section-number">4.1.1</span> Interés compuesto</h3>
 Imagina que tienes <span class="math inline">\(P\)</span> pesos y recibes, mes con mes, <span class="math inline">\(i \times 100\%\)</span> de interés (mensual, valga la redundancia) por ellos. ¿Cuánto dinero tendrás después de <span class="math inline">\(m\)</span> meses? La idea del modelo es simple:
 <span class="math display">\[\begin{equation}\nonumber
 \begin{aligned}
@@ -1570,7 +1637,7 @@ Se sigue que la fórmula para la cantidad de dinero para el mes <span class="mat
 \end{equation}\]</span>
 </div>
 <div id="valor-presente" class="section level3">
-<h3><span class="header-section-number">6.1.2</span> Valor presente</h3>
+<h3><span class="header-section-number">4.1.2</span> Valor presente</h3>
 El <strong>valor presente</strong> representa el valor actual de una cantidad futura de dinero. Por ejemplo, si hoy te doy <span class="math inline">\(\$10\)</span>, el valor presente de ese dinero es <span class="math inline">\(\$10\)</span> porque los tienes para gastar <em>ahora</em>; empero, si te prometo <span class="math inline">\(\$10\)</span> en un mes el valor presente de esa promesa no serán <span class="math inline">\(\$10\)</span> (porque no los tienes) pero tampoco será <span class="math inline">\(\$0\)</span> (porque <span class="math inline">\(\$10\)</span> a futuro es mejor que nada). En general, se considera que el valor presente del dinero está dado por <span class="math inline">\(\text{Valor futuro } (PV) \times \text{Ajuste por un factor de descuento}\)</span> (el factor de descuento es personal y depende de tu utilidad). En general el factor de descuento es una tasa de interés hipotética <span class="math inline">\(i &gt; 0\)</span> aplicada al valor presente (¿por qué tiene sentido en el modelo que <span class="math inline">\(i &gt; 0\)</span>?). Para aterrizar esto a un ejemplo, considera una promesa de tener <span class="math inline">\(\$ 100\)</span> en <span class="math inline">\(14\)</span> meses y una tasa de interés mensual de <span class="math inline">\(0.04\)</span>. Si esto fuera un modelo de interés compuesto (como en la sección anterior) tendríamos:
 <span class="math display">\[\begin{equation}\nonumber
 100 = \text{Mes } 14 = (1 + 0.04)^{14} \times \text{Valor Presente}
@@ -1583,10 +1650,10 @@ De manera general, el valor presente está dado por:
 <span class="math display">\[\begin{equation}\nonumber
 \text{Valor Presente} = \frac{\text{Valor Futuro}}{(1 + i)^{m}}
 \end{equation}\]</span>
-<p>donde <span class="math inline">\(i\)</span> es la tasa de interés hipotética y <span class="math inline">\(m\)</span> la cantidad de tiempo (en términos del tiempo de la tasa de interés) para alcanzar el valor futuro. Un ejemplo de objetos que utilizan el valor presente <a href="https://en.wikipedia.org/wiki/Money_market">son los activos del mercado monetario</a> ejemplo de estos son las letras del tesoro, (seguro los economistas me van a odiar por describirlos así) los cuales son “papeles” que te prometen dinero en el futuro. Es decir, tu compras una letra de <span class="math inline">\(\$100\)</span> la cual es una promesa de recibir <span class="math inline">\(\$100\)</span> en (digamos) un año. El negocio (para ti) está en que te lo venden más barato de lo que son.</p>
+<p>donde <span class="math inline">\(i\)</span> es la tasa de interés hipotética y <span class="math inline">\(m\)</span> la cantidad de tiempo (en términos del tiempo de la tasa de interés) para alcanzar el valor futuro. Un ejemplo de objetos que utilizan el valor presente <a href="https://en.wikipedia.org/wiki/Money_market">son los activos del mercado monetario</a> ejemplo de estos son las letras del tesoro, (seguro los economistas me van a odiar por describirlos así) los cuales son “papeles” que te prometen dinero en el futuro. Es decir, tú compras una letra de <span class="math inline">\(\$100\)</span> la cual es una promesa de recibir <span class="math inline">\(\$100\)</span> en (digamos) un año. El negocio (para ti) está en que te lo venden más barato de lo que son.</p>
 </div>
 <div id="valor-presente-del-flujo-de-caja-1" class="section level3">
-<h3><span class="header-section-number">6.1.3</span> Valor presente del flujo de caja</h3>
+<h3><span class="header-section-number">4.1.3</span> Valor presente del flujo de caja</h3>
 <p>El <strong>flujo de caja</strong> (en su forma más burda) corresponde a las entradas menos las salidas de activos líquidos de la caja durante un periodo determinado. Por poner un ejemplo, mi flujo de caja quincenal corresponde a mis ganancias en la quincena menos mis gastos. Vamos a considerar una empresa en crecimiento cuyo flujo de caja está dado inicialmente por <span class="math inline">\(F\)</span> pero que mes con mes sus ganancias incrementan de manera aritmética de acuerdo con la tabla:</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1642,7 +1709,7 @@ Ganancia
 </tr>
 </tbody>
 </table>
-donde la ganancia en el mes <span class="math inline">\(m\)</span> está dada por <span class="math inline">\(F + (n-1) d\)</span>. Una vez que sabemos esto, ¿cómo calculamos el valor presente del total del flujo de caja (futuro) a <span class="math inline">\(m\)</span> meses? (-piénsalo-). Mi propuesta es, mes con mes, agregar el nuevo flujo de caja descontado por la fecha de ese mes; es decir, el valor presente (<span class="math inline">\(VP\)</span>) está dado por:
+donde la ganancia en el mes <span class="math inline">\(m\)</span> está dada por <span class="math inline">\(F + (m-1) d\)</span>. Una vez que sabemos esto, ¿cómo calculamos el valor presente del total del flujo de caja (futuro) a <span class="math inline">\(m\)</span> meses? (-piénsalo-). Mi propuesta es, mes con mes, agregar el nuevo flujo de caja descontado por la fecha de ese mes; es decir, el valor presente (<span class="math inline">\(VP\)</span>) está dado por:
 <span class="math display">\[\begin{equation}\nonumber
 VP = \underbrace{F}_{\text{Mes actual}} + \underbrace{\frac{F + d}{(1+i)}}_{\text{Mes } 1} + \underbrace{\frac{F + 2d}{(1+i)^2}}_{\text{Mes }2} + \underbrace{\frac{F + 3d}{(1+i)^3}}_{\text{Mes } 3} +  \dots + \underbrace{\frac{F + m\cdot d}{(1+i)^{m}}}_{\text{Mes } m} = \sum\limits_{k=0}^{m} \frac{F + k \cdot d}{(1+i)^{k}}. 
 \end{equation}\]</span>
@@ -1697,7 +1764,7 @@ VP = F - \frac{d \cdot m}{(1 + i)^{m+1}} + \Big[ \frac{F}{i} + \frac{d}{i+1} \Bi
 </div>
 </div>
 <div id="valor-de-inversiones-en-pasivos" class="section level2">
-<h2><span class="header-section-number">6.2</span> Valor de inversiones en pasivos</h2>
+<h2><span class="header-section-number">4.2</span> Valor de inversiones en pasivos</h2>
 <span class="citation">Vali (2014)</span> . Supongamos que una empresa quiere comprar una nueva máquina de precio <span class="math inline">\(P\)</span> que ayudará a producir <span class="math inline">\(C\)</span> pesos en producto (considerando ya mantenimiento, operadores, etcétera) durante <span class="math inline">\(T\)</span> años. Terminados los <span class="math inline">\(T\)</span> años la máquina será vendida en piezas por <span class="math inline">\(S\)</span> dólares. Aunado a esto consideraremos un factor de descuento mensual de <span class="math inline">\(i \times 100\%\)</span> (<span class="math inline">\(i &gt; 0\)</span>). En particular queremos ver cuál de los siguientes productos conviene producir:
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1814,7 +1881,7 @@ C \quad &amp;  99998.29185 - 75000 = 24998.29185
 </div>
 </div>
 <div id="ejercicios" class="section level1">
-<h1><span class="header-section-number">7</span> Ejercicios</h1>
+<h1><span class="header-section-number">5</span> Ejercicios</h1>
 <ol style="list-style-type: decimal">
 <li><p><strong>¿Verdadero o falso?</strong> Decide si las siguientes afirmaciones son, en general, verdaderas o falsas. Si es verdadero justifica matemáticamente tu decisión; si es falso, da un ejemplo en el que la igualdad no se cumpla o bien establece cómo debería ser.</p>
 <ol style="list-style-type: lower-alpha">
@@ -1831,6 +1898,7 @@ C \quad &amp;  99998.29185 - 75000 = 24998.29185
 <li><p><span class="math inline">\(\left| \sum\limits_{j = 1}^{n} a_j \right| \leq \sum\limits_{j = 1}^{n} \left| a_j \right|\)</span> donde <span class="math inline">\(\left| a \right|\)</span> representa valor absoluto de <span class="math inline">\(a\)</span>.</p></li>
 <li><p><span class="math inline">\(\sum\limits_{k = 1}^{p} k^p = \sum\limits_{k = 1}^{p} \big( p- (k - 1) \big)^p\)</span></p></li>
 <li><p><span class="citation">Haaser, Sullivan, and Joseph (1970)</span> <span class="math inline">\(\sum\limits_{k = 1}^{n} 8k = (2n + 1)^2 - 1 + (n-1)(n-2)(n-3)\)</span></p></li>
+<li><p>(Difícil) <span class="math inline">\(\sum\limits_{k=0}^{n} (-1)^k (n-k)^2 = \sum\limits_{k = 0}^{n} k\)</span></p></li>
 </ol></li>
 <li><p>Encuentra los primeros <span class="math inline">\(4\)</span> términos de cada una de las siguientes sumas:</p>
 <ol style="list-style-type: lower-alpha">
@@ -1860,6 +1928,7 @@ C \quad &amp;  99998.29185 - 75000 = 24998.29185
 <li><p><span class="math inline">\(50 + 56.5 + 63 + 69.5 + \dots + 5412.5\)</span></p></li>
 <li><p><span class="math inline">\(\sum\limits_{k = 1}^{122} k^3 + k\)</span></p></li>
 <li><p><span class="math inline">\(\sum\limits_{k = 1}^{823} (823-k+1)^2\)</span></p></li>
+<li><p><span class="math inline">\(\sum\limits_{n = 1}^{362} (n - 2)^2 + 3\)</span></p></li>
 </ol></li>
 <li><p><span class="citation">Haaser, Sullivan, and Joseph (1970)</span> (adaptado). Justifica que ésa es la fórmula en términos del número de sumandos <span class="math inline">\(n\)</span> para las siguientes sumas (es decir, justifica que la suma del lado izquierdo realmente vale lo del lado derecho usando uno de los métodos que aprendimos en la sección)</p>
 <ol style="list-style-type: lower-alpha">
@@ -1885,14 +1954,19 @@ C \quad &amp;  99998.29185 - 75000 = 24998.29185
 <li><p>Los primeros <span class="math inline">\(m\)</span> números a la cuarta: <span class="math inline">\(1 + 16 + 81 + \dots + m^4\)</span>.</p></li>
 <li><p><span class="math inline">\(\sum\limits_{k = 1}^{n} 3^{k-1}\)</span></p></li>
 <li><p><span class="math inline">\(\sum\limits_{k = 1}^{n} \frac{1}{2^k}\)</span></p></li>
+<li><p><span class="math inline">\(\sum\limits_{k = 1}^{n} (3n+ 7)^2\)</span></p></li>
+<li><p><span class="math inline">\(\sum\limits_{k = 1}^{n} (4n - 5)^3\)</span></p></li>
+<li><p>La suma de los primeros <span class="math inline">\(m\)</span> pares al cuadrado.</p></li>
+<li><p>La suma de los primeros <span class="math inline">\(m\)</span> impares al cubo</p></li>
 <li><p><span class="math inline">\(\sum\limits_{k = 1}^{n} \frac{5}{3^{k-1}}\)</span></p></li>
 <li><p>La suma de los primeros <span class="math inline">\(m\)</span> pares al cuadrado: <span class="math inline">\(2^2 + 4^2 + \dots + (2m)^2\)</span></p></li>
 <li><p>La suma de los primeros impares al cubo hasta <span class="math inline">\(2m-1\)</span>: <span class="math inline">\(1^3 + 3^3 + \dots + (2m - 1)^3\)</span></p></li>
-<li><p><span class="citation">Courant (2011)</span> <span class="math inline">\(1\cdot 2 + 2 \cdot 3 + 3 \cdot 4 + \dots + n \cdot (n+1)\)</span></p></li>
+<li><p><strong><span class="citation">Courant (2011)</span></strong> <span class="math inline">\(1\cdot 2 + 2 \cdot 3 + 3 \cdot 4 + \dots + n \cdot (n+1)\)</span></p></li>
 <li><p><span class="math inline">\(\sum\limits_{j = 1}^{n} j! \cdot j\)</span>. <!-- (es una telescópica disfrazada) --></p></li>
-<li><p><span class="citation">Courant (2011)</span> <span class="math inline">\(\frac{1}{1\cdot 2} + \frac{1}{2 \cdot 3} + \frac{1}{3 \cdot 4} + \dots + \frac{1}{n \cdot (n+1)}\)</span></p></li>
+<li><p><strong><span class="citation">Courant (2011)</span></strong> <span class="math inline">\(\frac{1}{1\cdot 2} + \frac{1}{2 \cdot 3} + \frac{1}{3 \cdot 4} + \dots + \frac{1}{n \cdot (n+1)}\)</span></p></li>
 <li><p>(Difícil) <span class="math inline">\(3^3 + 6^3 + 9^3 + 12^3 + \dots + 333^3\)</span> <!-- (sale fácil con el ejercicio de @shindy) --></p></li>
-<li><p><span class="citation">Courant (2011)</span> <span class="math inline">\(\frac{3}{1^2 \cdot 2^2} + \frac{5}{2^2 \cdot 3^2} + \frac{7}{3^2 \cdot 4^2} + \dots + \frac{2n + 1}{n^2 \cdot (n+1)^2}\)</span></p></li>
+<li><p><strong><span class="citation">Courant (2011)</span></strong> <span class="math inline">\(\frac{3}{1^2 \cdot 2^2} + \frac{5}{2^2 \cdot 3^2} + \frac{7}{3^2 \cdot 4^2} + \dots + \frac{2n + 1}{n^2 \cdot (n+1)^2}\)</span></p></li>
+<li><p><strong><span class="citation">Grigorieva (2016)</span></strong> <span class="math inline">\(3 + 13 + 30 + 54 + 85 + 123 + \dots\)</span> (así hasta tener <span class="math inline">\(322\)</span> sumandos).</p></li>
 <li><p>(Muy difícil) <span class="math inline">\(\sum\limits_{k=1}^{n} k^k\)</span></p></li>
 </ol></li>
 <li><p>(<em>American Invitational Mathematics Examination I</em>) Cien círculos concéntricos de radios <span class="math inline">\(1, 2, \dots, 100\)</span> son dibujados en el plano. El más pequeño tiene color rojo. La franja en torno a éste (correspondiente al círculo <span class="math inline">\(2\)</span>) es verde. La tercer franja (correspondiente al círculo <span class="math inline">\(3\)</span>) en torno a la verde es roja de nuevo y así sucesivamente. ¿Qué porcentaje del círculo total tiene color verde? (<em>Hint</em> la respuesta no es <span class="math inline">\(1/2\)</span> pero <em>casi</em>.)</p></li>
@@ -1956,6 +2030,40 @@ También es posible considerar un producto como este:
 <li><p><span class="math inline">\(\prod\limits_{i = 1}^{n} 2^{i}\)</span></p></li>
 <li><p><span class="math inline">\(\prod\limits_{i = 1}^{n} a_i\)</span> donde <span class="math inline">\(a_i = \frac{(i+1)}{i}\)</span> si <span class="math inline">\(i\)</span> es par y <span class="math inline">\(a_i = \frac{i-1}{i}\)</span> si <span class="math inline">\(i\)</span> es impar.</p></li>
 </ol></li>
+</ol>
+<p>8.Encuentra el error en el proceso siguiente (algo hicieron mal y con ello acabaron con esa conclusión ¿qué hicieron mal?): 
+<div class="panel panel-default">
+	<div id =  Ejercicio incorrecto0.409249950665981  class="panel-heading">
+		<h4> Ejercicio incorrecto  </h4>
+	</div>
+	<div class="panel-body">
+		<i></i>
+		<div class="well" style = "margin-top: 10px;">
+			 <b>Demostración:</b> 
+Tenemos por un lado que:
+\begin{equation}\nonumber
+\sum\limits_{j = 1}^{10} j = 55 \quad \textrm{ usando la fórmula } \frac{n(n+1)}{2};
+\end{equation}
+por otro lado:
+\begin{equation}\nonumber
+\sum\limits_{j = 1}^{10} j = j \sum\limits_{j = 1}^{10} 1 = j \cdot 10
+\end{equation}
+de donde igualando los términos tenemos que:
+\begin{equation}\nonumber
+j \cdot 10 = 55
+\end{equation}
+y por tanto $j = 5.5$. 
+
+Para checar que estamos bien, comprobamos. Para ello sustituimos $j = 5.5$ en la primer ecuación de donde tenemos:
+\begin{equation}\nonumber
+\sum\limits_{j = 1}^{10} j = \sum\limits_{j = 1}^{10} 5.5 = 55.
+\end{equation}
+ 
+		</div>
+	</div>
+</div>
+</p>
+<ol start="11" style="list-style-type: decimal">
 <li><strong>Un modelo de acciones</strong> Dados <span class="math inline">\(n\)</span> puntos en <span class="math inline">\(\mathbb{R}^2\)</span> es posible interpolar los puntos con un polinomio y así hallar una curva que permita modelar. Supongamos que medimos valores <span class="math inline">\(y_1, y_2, \dots, y_n\)</span> en respectivos tiempos <span class="math inline">\(1,2, \dots, n\)</span> (por ejemplo, podemos pensar que medimos el valor de las acciones de X compañía en <span class="math inline">\(5\)</span> días: <span class="math inline">\(y_1, y_2, \dots, y_{5}\)</span> son los valores de la acción medidos en los días <span class="math inline">\(t_1, t_2, \dots, t_{5}\)</span> respectivamente). Un polinomio que pasa por los puntos <span class="math inline">\((t_1, y_1), (t_2, y_2), \dots, (t_n, y_n)\)</span> es el dado por:
 <span class="math display">\[\begin{equation}\nonumber
 f(t) = \sum\limits_{i = 1}^{n} \Bigg( \prod\limits_{\substack{j = 1 \\ j \neq i}}^{n} \frac{t - t_j}{t_j - t_i} \Bigg).
@@ -2068,11 +2176,14 @@ Dicho de otra manera, muestra que <span class="math inline">\(\mu\)</span> es la
 \min\limits_{m \in \mathbb{R}}  \quad \sum\limits_{i = 1}^{n} \big( x_i - m \big)^2
 \end{equation}\]</span>
 <p>Éste ejemplo muestra porqué a los estadísticos les gusta usar la media: ésta es el número que está “menos lejos” de los datos bajo distancia cuadrática. <strong>Recuerda:</strong> Para minimizar <a href="http://mathinsight.org/minimization_maximization_refresher">necesitas derivar y luego corroborar que tu punto crítico sea un mínimo</a> (y no un punto silla o un máximo)</p></li>
-<li><strong>Ahorrando para el segundo viaje a Acapulco</strong> Considera un fondo de ahorro (como en la sección ). Adapta el modelo en dicha sección a que:
+<li><strong>Ahorrando para el viaje a Acapulco</strong> Considera un fondo de ahorro (como en la <a href="#un-problema-de-intereses">primera sección</a> ). Adapta el modelo en dicha sección a que:
 <ol style="list-style-type: lower-alpha">
 <li>Los depósitos sean quincenales.</li>
-<li>Los depósitos sean diarios. Suponiendo una tasa de <span class="math inline">\(k = 0.03\)</span> (quincenal) o <span class="math inline">\(0.002\)</span> diaria (según el caso en el que estás) y depósitos quincenales de <span class="math inline">\(150\)</span> (diarios de <span class="math inline">\(10\)</span>), ¿cuánto tiempo tiene que pasar para que haya una diferencia de al menos <span class="math inline">\(500\)</span> pesos entre depositar diario y depositar cada quincena.</li>
+<li>Los depósitos sean diarios.</li>
 </ol></li>
+</ol>
+<p>Suponiendo una tasa de <span class="math inline">\(k = 0.03\)</span> (quincenal) o <span class="math inline">\(0.002\)</span> diaria (según el caso en el que estás) y depósitos quincenales de <span class="math inline">\(150\)</span> (diarios de <span class="math inline">\(10\)</span>), ¿cuánto tiempo tiene que pasar para que haya una diferencia de al menos <span class="math inline">\(500\)</span> pesos entre depositar diario y depositar cada quincena.</p>
+<ol start="14" style="list-style-type: decimal">
 <li><p><strong>El problema de la aseguradora</strong> Una aseguradora cuenta con <span class="math inline">\(100,000\)</span> asegurados que mes con mes pagan una prima <span class="math inline">\(p\)</span> por asegurar sus casas. Los cuatro primeros meses de cada año (periodo Enero-Abril) hay, en promedio <span class="math inline">\(25\)</span> reclamaciones (mensuales), cada una por <span class="math inline">\(2,000\)</span> pesos (dinero que “sale” de la bolsa de la aseguradora para cubrir las necesidades de sus clientes). Los siguientes cuatro meses (Mayo-Agosto) hay, en promedio, <span class="math inline">\(15\)</span> reclamaciones mensuales cada una de <span class="math inline">\(5,000\)</span> pesos. El último cuatrimestre (Septiembre-Diciembre) hay, en promedio, <span class="math inline">\(20\)</span> reclamaciones (mensuales) cada una de <span class="math inline">\(3,000\)</span> pesos. Supongamos, además que el capital inicial de la aseguradora son <span class="math inline">\(25,000,000\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Si la prima mensual que se le cobra a los asegurados es <span class="math inline">\(p = 5\)</span> ¿cuánto tiempo tiene que pasar para que la aseguradora se arruine (i.e. se quede sin dinero)? (Ojo la respuesta puede ser <strong>nunca se queda sin dinero</strong>)</p></li>
@@ -2085,7 +2196,7 @@ Dicho de otra manera, muestra que <span class="math inline">\(\mu\)</span> es la
 </blockquote>
 <ol style="list-style-type: lower-alpha">
 <li>Justifica a alguien que no sabe de finanzas ni de matemáticas que el modelo matemático para el precio del bono sea:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}\nonumber
 P_B = \sum\limits_{t = 1}^{T} \left[ \frac{C}{(1 + \frac{i}{m})^{mt}} + \frac{F}{(1 + \frac{i}{m})^{mt}} \right].
 \end{equation}\]</span>
 <strong>Ojo</strong> La notación es confusa pero <span class="math inline">\(i_c\)</span> e <span class="math inline">\(i\)</span> son diferentes cosas.</li>
@@ -2097,19 +2208,19 @@ P_B = \sum\limits_{t = 1}^{T} \left[ \frac{C}{(1 + \frac{i}{m})^{mt}} + \frac{F}
 <li>Supongamos que la tasa de inflacion mensual ha sido del <span class="math inline">\(0.25 \%\)</span> (es decir, mes con mes los precios aumentan <span class="math inline">\(0.25\%\)</span>). ¿Cuál es la tasa de inflación del lustro (5 años)? <strong>Ojo</strong> La respuesta no es <span class="math inline">\(15\%\)</span>.</li>
 <li>Supongamos que el precio de la lechuga (el único bien que usamos para medir la inflación) aumentó de <span class="math inline">\(13\)</span> pesos a <span class="math inline">\(37\)</span> en <span class="math inline">\(2\)</span> años. ¿Cuál fue la tasa de inflación mensual (asumiendo que todos los meses fue la misma tasa)?</li>
 </ol></li>
-<li><span class="citation">Shidy (1876)</span> <strong>Suma de los cubos</strong> Sea <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_1 + \Delta\)</span>, <span class="math inline">\(a_1 + 2 \Delta\)</span>, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(a_n + n \Delta\)</span> una sucesión aritmética.
+<li><span class="citation">Shidy (1876)</span> <strong>Suma de los cubos</strong> Sea <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_1 + d\)</span>, <span class="math inline">\(a_1 + 2 d\)</span>, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(a_n + n \cdot d\)</span> una sucesión aritmética.
 <ol style="list-style-type: lower-alpha">
 <li>Demuestra que la suma de los cubos:
 <span class="math display">\[\begin{equation}\nonumber
-\mathcal{S} = a_1^3 + [a_1 +  \Delta]^3 + [a_1 + 2 \Delta]^3 + \dots + [a_1 + n \Delta]^3
+\mathcal{S} = a_1^3 + [a_1 +  d]^3 + [a_1 + 2 d]^3 + \dots + [a_1 + n \cdot d]^3
 \end{equation}\]</span>
 es divisible por la suma aritmética:
 <span class="math display">\[\begin{equation}\nonumber
-a_1 + [a_1 +  \Delta] + [a_1 + 2 \Delta] + \dots + [a_1 + n \Delta].
+a_1 + [a_1 +  d] + [a_1 + 2 d] + \dots + [a_1 + n \cdot d].
 \end{equation}\]</span></li>
-<li>Utiliza lo anterior para demostrar que si, en particular, <span class="math inline">\(a_1 = 0\)</span> entonces tenemos que <span class="math inline">\(\mathcal{S} = \Delta \left( \frac{n}{2} \cdot ( a_1 + a_n ) \right)^2\)</span></li>
+<li>Utiliza lo anterior para demostrar que si, en particular, <span class="math inline">\(a_1 = 0\)</span> entonces tenemos que <span class="math inline">\(\mathcal{S} = d \left( \frac{n}{2} \cdot ( a_1 + a_n ) \right)^2\)</span></li>
 </ol></li>
-<li><strong>Valor presente de flujos de capital en el infinito</strong> En la sección de <a href="#valor_presente_del_flujo_de_caja">valor presente aplicado al flujo de caja</a> obtuvimos que el valor presente del flujo de caja a <span class="math inline">\(m\)</span> meses es una función de <span class="math inline">\(m\)</span> dada por:
+<li><strong>Valor presente de flujos de capital en el infinito</strong> En la sección de <a href="#valor-presente-del-flujo-de-caja">valor presente del flujo de caja</a> obtuvimos que el valor presente del flujo de caja a <span class="math inline">\(m\)</span> meses es una función de <span class="math inline">\(m\)</span> dada por:
 <span class="math display">\[\begin{equation}\nonumber
 \begin{aligned}
 VP(m) = F - \frac{d \cdot m}{(1 + i)^{m+1}} + \Big[ \frac{F}{i} + \frac{d}{i+1} \Big] \cdot \Big[ 1 - \Big( \frac{1}{1+i} \Big)^m \Big]
@@ -2120,7 +2231,7 @@ VP(m) = F - \frac{d \cdot m}{(1 + i)^{m+1}} + \Big[ \frac{F}{i} + \frac{d}{i+1} 
 <li>¿Cómo interpretas dicha cantidad dentro del contexto del problema? (es decir, qué representa ese límite en términos financieros)</li>
 </ol></li>
 <li><p><strong>El préstamo</strong> Solicitaré un préstamo al banco de <span class="math inline">\(\$100,000\)</span> por pagar a 3 años bajo una tasa mensual del <span class="math inline">\(7\%\)</span>. ¿Cuánto debo pagar mes con mes si mis aportaciones mensuales son fijas? Plantea y resuelve el problema usando sumas. Si usas una fórmula <em>justifica</em> de cómo se obtiene.</p></li>
-<li><strong>El negocio</strong> Un negocio te ofrece <span class="math inline">\(\$3225\)</span> asegurados dentro de <span class="math inline">\(2\)</span> años si tú pones una inversión inicial de <span class="math inline">\(1000\)</span> pesos (es decir, te están vendiendo <span class="math inline">\(\$3225\)</span> dentro de dos años por <span class="math inline">\(1000\)</span>) ahora.
+<li><strong>El negocio</strong> Un negocio te ofrece <span class="math inline">\(\$3225\)</span> asegurados dentro de <span class="math inline">\(2\)</span> años si tú pones una inversión inicial de <span class="math inline">\(1000\)</span> pesos (es decir, te están vendiendo <span class="math inline">\(\$3225\)</span> dentro de dos años por <span class="math inline">\(1000\)</span> ahora).
 <ol style="list-style-type: lower-alpha">
 <li>¿Cuál es la tasa de descuento mensual <span class="math inline">\(i\)</span> que están considerando?</li>
 <li>El banco de Monopoly te ofrece una tasa anual (sobre tus inversiones) del <span class="math inline">\(6\%\)</span> ¿qué te conviene más: invertir en el negocio o poner tu dinero en el banco?</li>
@@ -2130,7 +2241,7 @@ VP(m) = F - \frac{d \cdot m}{(1 + i)^{m+1}} + \Big[ \frac{F}{i} + \frac{d}{i+1} 
 P = \text{VN} \times \Big( 1 - \frac{b\times t}{360} \Big)
 \end{equation}\]</span>
 <p>donde <span class="math inline">\(VN\)</span> es el valor nominal, <span class="math inline">\(b\)</span> la tasa de descuento y <span class="math inline">\(t\)</span> el plazo del CETE (días).</p></li>
-<li><strong>Invirtiendo en El taxi</strong> Supongamos que cada taxi cuesta <span class="math inline">\(C\)</span> pesos (pensemos que los <span class="math inline">\(C\)</span> pesos incluyen el coche, la cromática y las placas así como el permiso para quien conduce). Año con año los taxis deben pasar revista (revisión por parte del gobierno de la ciudad) que <a href="http://www.eluniversal.com.mx/articulo/metropoli/df/2016/03/22/revista-vehicular-2016-para-taxis-costara-mil-204-pesos">cuesta</a> <span class="math inline">\(\$1,204\)</span>. La vida útil (legal) de un taxi son <span class="math inline">\(10\)</span> años, a los <span class="math inline">\(10\)</span> años debes venderlo y comprar otro sin importar que el que tienes funcione. Cada año el coche se deprecia a una tasa de <span class="math inline">\(i \times 100\%\)</span>. Por otro lado, todos los años cada unidad requiere una inversión <span class="math inline">\(m \approx 5,000\)</span> de mantenimiento. Como requerimiento legal, debes contratar también un seguro de auto (que depende del valor del auto en ese año) de <span class="math inline">\(k \times 100\%\)</span> el valor actual del coche (es decir, considerando depreciación). Finalmente, considera que las ganancias diarias (netas; es decir, descontanto gasolina) que te deja el coche son de <span class="math inline">\(\$300\)</span> y que esto ocurre durante <span class="math inline">\(350\)</span> de los <span class="math inline">\(365\)</span> días del año (para tener <span class="math inline">\(15\)</span> de vacaciones).
+<li><strong>Invirtiendo en un taxi</strong> Supongamos que cada taxi cuesta <span class="math inline">\(C\)</span> pesos (pensemos que los <span class="math inline">\(C\)</span> pesos incluyen el coche, la cromática y las placas así como el permiso para quien conduce). Año con año los taxis deben pasar revista (revisión por parte del gobierno de la ciudad) que <a href="http://www.eluniversal.com.mx/articulo/metropoli/df/2016/03/22/revista-vehicular-2016-para-taxis-costara-mil-204-pesos">cuesta</a> <span class="math inline">\(\$1,204\)</span>. La vida útil (legal) de un taxi son <span class="math inline">\(10\)</span> años, a los <span class="math inline">\(10\)</span> años debes venderlo y comprar otro sin importar que el que tienes funcione. Cada año el coche se deprecia a una tasa de <span class="math inline">\(i \times 100\%\)</span>. Por otro lado, todos los años cada unidad requiere una inversión <span class="math inline">\(m \approx 5,000\)</span> de mantenimiento. Como requerimiento legal, debes contratar también un seguro de auto (que depende del valor del auto en ese año) de <span class="math inline">\(k \times 100\%\)</span> el valor actual del coche (es decir, considerando depreciación). Finalmente, considera que las ganancias diarias (netas; es decir, descontanto gasolina) que te deja el coche son de <span class="math inline">\(\$300\)</span> y que esto ocurre durante <span class="math inline">\(350\)</span> de los <span class="math inline">\(365\)</span> días del año (para tener <span class="math inline">\(15\)</span> de vacaciones).
 <ol style="list-style-type: lower-alpha">
 <li>¿Cuánto dinero tendrás en 15 años si durante los 15 te dedicas a ser taxista? (<strong>Ojo</strong> No olvides que al añó <span class="math inline">\(10\)</span> debes venderlo y comprar uno nuevo)</li>
 <li>Asume que <span class="math inline">\(C = 200,000\)</span>, que la tasa de depreciación es del <span class="math inline">\(20\%\)</span> y que el seguro corresponde al <span class="math inline">\(1\%\)</span> del costo del auto. ¿Cuál es el valor presente del taxi al año <span class="math inline">\(7\)</span>?</li>
@@ -2172,7 +2283,7 @@ Establece los modelos para cada una de estas opciones e infórmalos usando datos
 -->
 </div>
 <div id="referencias" class="section level1">
-<h1><span class="header-section-number">8</span> Referencias</h1>
+<h1><span class="header-section-number">6</span> Referencias</h1>
 <!-- Aquí van las referencias -->
 <div id="refs" class="references">
 <div id="ref-courant2011differential">
