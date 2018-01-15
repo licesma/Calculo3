@@ -1858,6 +1858,29 @@ Por lo cual concluimos nos conviene más producir $A$.
     
 6. (_American Invitational Mathematics Examination I_) Cien círculos concéntricos de radios $1, 2, \dots, 100$ son dibujados en el plano. El más pequeño tiene color rojo. La franja en torno a éste (correspondiente al círculo $2$) es verde. La tercer franja (correspondiente al círculo $3$) en torno a la verde es roja de nuevo y así sucesivamente. ¿Qué porcentaje del círculo total tiene color verde? (_Hint_ la respuesta no es $1/2$ pero *casi*.)
 
+8.Encuentra el error en el proceso siguiente (algo hicieron mal y con ello acabaron con esa conclusión ¿qué hicieron mal?):
+```{r}
+demo <- "
+Para $x \\neq 0$, tenemos la siguiente igualdad
+\\begin{equation}\\nonumber
+x^2 = \\underbrace{x + x + \\dots + x}_{x \\text{ veces }}
+\\end{equation}
+de donde derivando de los dos lados:
+\\begin{equation}\\nonumber
+2 x = \\underbrace{1 + 1 + \\dots + 1}_{x \\text{ veces }}
+\\end{equation}
+por lo cual 
+\\begin{equation}\\nonumber
+2 x = x
+\\end{equation}
+Como consideramos $x \\neq 0$ podemos dividir y obtener:
+\\begin{equation}\\nonumber
+2 = 1.
+\\end{equation}
+"
+build_theorem("Ejercicio incorrecto", "", proof = demo, "2 = 1")
+```   
+
 7. Asume un fondo de ahorro con depósitos fijos (como el de la sección). En él cada inicio de mes deposito $p = 100$ pesos y el fondo, a inicios del mes siguiente me da el $3\%$ sobre lo que tenía el mes pasado. De esta forma el primer mes sólo tengo $100$ pero el segundo mes tengo $100 \times 0.03 + 100 = 203$. ¿Cuántos meses tienen que pasar para que yo sea millonario? (es decir, encuentra el primer mes en el que mi dinero en el fondo de ahorro sea $\geq 1 000 000$).
 
 7. Evalúa de una forma diferente a la de las notas $\sum_{k=1}^{n} k^3$.
