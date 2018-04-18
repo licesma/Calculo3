@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Rodrigo Zepeda" />
+
+
+<title>Paradojas del infinito</title>
+
+<script src="paradojas_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="paradojas_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="paradojas_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="paradojas_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="paradojas_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="paradojas_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="paradojas_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="paradojas_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="paradojas_files/navigation-1.1/tabsets.js"></script>
+<link href="paradojas_files/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="paradojas_files/highlightjs-1.1/highlight.js"></script>
+<!-- Meta characteristics -->
+<meta name="description" content="Random Math Notes">
+<meta name="keywords" content="Probability, Markov Chains, Markov Processes, Stochastic Processes">
+<meta name="author" content="Rodrigo Zepeda Tello">
+
+<!-- Add d3js -->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<!-- Nice mathjax format -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true, }, TeX: { equationNumbers: { autoNumber: "AMS" } } });
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<!--Navigation menu-->
+<link href="css/custom.css" rel="stylesheet">
+<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+            <a class="navbar-brand" href="https://rodrigozepeda.github.io/Calculo3">Notas de Cálculo III</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-main">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="https://github.com/RodrigoZepeda/Calculo3"><img src="images/GitHub-Mark-Light-32px.png"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Paradojas del infinito</h1>
+<h4 class="author"><em>Rodrigo Zepeda</em></h4>
+
+</div>
+
+
+<div id="paradojas-con-el-infinito" class="section level1">
+<h1><span class="header-section-number">1</span> Paradojas con el infinito</h1>
+<p>El infinito es una cosa particularmente extraña: mucha de la intuición que tenemos de nuestra experiencia finita no sirve. Al usar el infinito surgen diferentes paradojas que, como veremos, resultan en comportamientos extravagantes.</p>
+<div id="paradoja-de-san-petesburgo" class="section level2">
+<h2><span class="header-section-number">1.1</span> Paradoja de San Petesburgo</h2>
+<p>Una idea prevalente en teoría económica (y teoría de riesgo) es que el máximo que debería pagarse por un objeto es su ganancia promedio (pensemos, en afán de simplicidad, que lo único que nos importa es obtener más dinero). Por ejemplo, si se sabe que cierta franquicia te regresa en promedio <span class="math inline">\(\$ 1000\)</span> al año lo más que deberías pagar por una licencia anual serían <span class="math inline">\(\$ 1000\)</span>. ¡Nadie pagaría <span class="math inline">\(\$ 200,000\)</span> por ganar sólo <span class="math inline">\(\$ 1000\)</span>! Suena lógico ¿no?.</p>
+<p>Si metemos el infinito en la mezcla las cosas ya no son tan lógicas. Para ello te propongo un juego de apuestas. Para éste utilizaremos un mecanismo que genere ceros o unos con igual probabilidad (<span class="math inline">\(1/2\)</span> es la probabilidad de que salga <span class="math inline">\(0\)</span> y <span class="math inline">\(1/2\)</span> de obtener <span class="math inline">\(1\)</span>). Algunas sugerencias incluyen: arrojar monedas azarosamente y asociar a una cara un <span class="math inline">\(0\)</span> y a la otra un <span class="math inline">\(1\)</span>, contar cuántas personas vestidas de rojo pasan por un lugar concurrido en un minuto y asociar un <span class="math inline">\(1\)</span> si es un número par o un <span class="math inline">\(0\)</span> si es impar, o medir el ruido atmosférico. Para este ejemplo, vamos a considerar el caso en el que arrojamos una moneda tal que ambas caras tienen la misma probabilidad (<span class="math inline">\(1/2\)</span>) y una de las caras representa un <span class="math inline">\(1\)</span> mientras que la otra un <span class="math inline">\(0\)</span>.</p>
+<p>Las reglas del juego son las siguientes: si en el primer tiro obtienes un <span class="math inline">\(1\)</span> ganas <span class="math inline">\(\$2\)</span> y el juego continúa. Si obtienes un <span class="math inline">\(0\)</span> el juego se detiene y te llevas lo ganado hasta el momento. En los tiros subsecuentes (si no has tenido un <span class="math inline">\(0\)</span>) las ganancias se duplican siempre que sigas la racha de sacar sólo <span class="math inline">\(1\)</span>s; es decir, si para el segundo tiro obtienes de nuevo un <span class="math inline">\(1\)</span> ganas <span class="math inline">\(\$2\times 2\)</span> (<span class="math inline">\(\$4\)</span> en total pues duplicaste lo que ya tenías). Si sale <span class="math inline">\(0\)</span> te detienes. Para el tercer tiro tendrías <span class="math inline">\(\$4\times 2 = \$8\)</span> si de nuevo obtienes un <span class="math inline">\(1\)</span>. En general, para el tiro <span class="math inline">\(n\)</span> si no has obtenido ningún <span class="math inline">\(0\)</span> ganarás <span class="math inline">\(\$2^n\)</span> (en el tiro <span class="math inline">\(n\)</span> ganas <span class="math inline">\(\$2\)</span> pero ya tenías <span class="math inline">\(\$2^{n-1}\)</span> de los anteriores y los duplicaste). ¿Cuánto pagarías por jugar este juego? (Piénsalo dos segundos: cuál es el precio máximo que tú pagarías por jugar).</p>
+<p>Probablemente, si costara <span class="math inline">\(\$1\)</span> lo jugarías; quizá si costara <span class="math inline">\(\$2\)</span> también. ¿Lo jugarías si costara <span class="math inline">\(\$20\)</span>? ¿Si costara <span class="math inline">\(\$200\)</span> lo harías de todas formas? ¿Y si te costara todo el dinero que posees lo jugarías? La respuesta que te daría la teoría económica “clásica” es que <strong>sin importar lo que cueste el juego deberías jugarlo</strong>. Veamos por qué.</p>
+<p>El objetivo es calcular la ganancia esperada del juego (o la ganancia de un juego “promedio”). Para ello estudiaremos los casos involucrados.</p>
+<ol style="list-style-type: decimal">
+<li>Con probabilidad <span class="math inline">\(1/2\)</span> ganas <span class="math inline">\(\$2\)</span> en el primer tiro.</li>
+<li>Con probabilidad <span class="math inline">\(1/2\)</span> duplicas lo que ya tenías en el segundo tiro (duplicaste tu <span class="math inline">\(\$2\)</span> si obtuviste <span class="math inline">\(1\)</span>) por lo que en total la probabilidad es <span class="math inline">\(1/2 \times 1/2 = 1/4\)</span> y las ganancias son <span class="math inline">\(\$ 2 \times 2 = \$4\)</span></li>
+<li>Con probabilidad <span class="math inline">\(1/2\)</span> ganas <span class="math inline">\(\$2\)</span> en el tercer tiro; sin embargo para llegar al tercero tuviste que pasar por los anteriores dos ganando por lo que la probabilidad total de ganar <span class="math inline">\(\$8\)</span> en el tercer tiro es <span class="math inline">\(1/2 \times 1/4\)</span>.</li>
+</ol>
+En general sea <span class="math inline">\(G_n\)</span> la ganancia esperada haciendo <span class="math inline">\(n\)</span> tiros entonces tenemos:
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+G_n &amp; = \underbrace{\frac{1}{2} \times  \$2}_{\text{Ganar sólo } 1 \text{tiro}} + \underbrace{\frac{1}{2} \times \frac{1}{2} \times  \$2 \times 2}_{\text{Ganar } 2 \text{ tiros}} +  \underbrace{\frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} \times  \$ 2^2 \times 2)}_{3 \text{ tiros}} 
+\\ &amp; \qquad + \underbrace{\frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} \times  \$2^3 \times 2)}_{4 \text{ tiros}} + \dots + \underbrace{\overbrace{\frac{1}{2} \times \frac{1}{2} \times \cdots \times \frac{1}{2}}^{n \text{ veces}} \times \$ 2^{n-1} \times 2}_{n \text{ tiros}}\\
+&amp; = \sum\limits_{k = 1}^{n} \frac{1}{2^k} \cdot 2^k = \sum\limits_{k=1}^{n} 1.
+\end{aligned}
+\end{equation}\]</span>
+Como, potencialmente podemos tener infinitos tiros (<em>i.e.</em> nada garantiza que la moneda se detiene en algún momento específico, por ejemplo <span class="math inline">\(n = 500\)</span> o en <span class="math inline">\(n = 16736\)</span>) entonces la ganancia esperada del juego es:
+<span class="math display">\[\begin{equation}
+\lim_{n \to \infty} G_n = \lim_{n \to \infty} \sum\limits_{k=1}^{n} 1 = \sum\limits_{k=1}^{\infty} 1 = \infty;
+\end{equation}\]</span>
+<p>es decir, la ganancia esperada del juego es <span class="math inline">\(\infty\)</span> por lo que, sin importar cuánto te costara, tú deberías pagar ¡porque puedes ganar <span class="math inline">\(\infty\)</span> y cualquier precio es menor que infinito!</p>
+<div id=" Nota0.26840394642204 " class="alert alert-info">
+<b> Nota : </b> La paradoja de San Petesburgo radica en que mucha gente acepta que cualquier precio por debajo del precio promedio es buen precio pero, en general, nadie dice que dejaría todos sus bienes por una oportunidad de jugar este juego. ¡Sería ilógico pensar que recuperarías tu inversión!
+</div>
+</div>
+<div id="paradoja-de-littlewood-ross" class="section level2">
+<h2><span class="header-section-number">1.2</span> Paradoja de Littlewood-Ross</h2>
+<p>Asume que tienes infinitos billetes de <span class="math inline">\(\$1\)</span> numerados <span class="math inline">\(1,2,3, \dots\)</span> y que tienes un banco donde puedes poner todos (de hecho las vas a poner en una hora). El banco cobra una comisión de <span class="math inline">\(\$1\)</span> por cada transacción usando el billete que tiene más a la mano y sólo permite hacer transacciones de <span class="math inline">\(10\)</span> en <span class="math inline">\(10\)</span>. En la primer <span class="math inline">\(1/2\)</span> de hora metes los primeros <span class="math inline">\(10\)</span> billetes al banco y ellos te cobran usando el billete <span class="math inline">\(1\)</span> (el que entró primero). Piensas que no importa porque como vas a meter infinitos billetes ¿qué mas da que te quiten el <span class="math inline">\(1\)</span>? En el siguiente <span class="math inline">\(1/4\)</span> de hora metes las siguientes <span class="math inline">\(10\)</span> billetes (<em>i.e.</em> del <span class="math inline">\(11\)</span> al <span class="math inline">\(20\)</span>) y el banco cobra su comisión usando el <span class="math inline">\(2\)</span> (el que entró en segundo lugar). Continúas tu proceso (a pesar de que el <span class="math inline">\(2\)</span> lo hayan cobrado como comisión) pues como vas a meter infinitos billetes el que el <span class="math inline">\(2\)</span> no esté no debería importar ¿cierto? El tercer paso ocurre al <span class="math inline">\(1/8\)</span> de hora cuando metes los <span class="math inline">\(10\)</span> subsecuentes (<span class="math inline">\(21\)</span> al <span class="math inline">\(30\)</span>) y ¡malhora! el banco te cobra la comisión puntualmente usando el billete <span class="math inline">\(3\)</span> (el que entró en tercer lugar). En general, el paso <span class="math inline">\(n\)</span> ocurre al <span class="math inline">\(1/2^n\)</span> de hora cuando metes los billetes <span class="math inline">\(10(n-1) + 1\)</span> hasta la <span class="math inline">\(10n\)</span> y el banco te cobra usando el billete <span class="math inline">\(n\)</span> (el que entró en <span class="math inline">\(n\)</span>-ésimo lugar). Terminando la hora revisas tu cuenta bancaria y ¡gran sorpresa!…</p>
+<div id="tu-cuenta-no-tiene-ni-un-billete" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Tu cuenta no tiene ni un billete</h3>
+Vamos a modelar el proceso <em>tomando en cuenta la numeración de los billetes</em>. Para ello asignemos a cada billete una variable: <span class="math inline">\(a_1\)</span> para el billete <span class="math inline">\(1\)</span>, <span class="math inline">\(a_2\)</span> para el billete <span class="math inline">\(2\)</span>, <span class="math inline">\(a_3\)</span> para el tercero; <span class="math inline">\(a_n\)</span> para el <span class="math inline">\(n\)</span>-ésimo billete. Podemos ver el proceso de ponerlos en el banco como una suma. Por ejemplo para el primer momento tenemos:
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+B_1 &amp; = \underbrace{a_1 + a_2 + a_3 + a_4 + a_5 + a_6 + a_7 + a_8 + a_9 + a_{10}}_{\text{Metí los primeros } 10 \text{ billetes }} - \overbrace{a_1}^{\text{Comisión usando el billete }1}
+\\ &amp; =  a_2 + a_3 + a_4 + a_5 + a_6 + a_7 + a_8 + a_9 + a_{10}
+\\ &amp; = \sum\limits_{i = 2}^{10} a_i
+\end{aligned}
+\end{equation}\]</span>
+para el segundo momento tendremos:
+<span class="math display">\[\begin{equation}\nonumber
+\begin{aligned}
+B_2 &amp; = \underbrace{a_1 + a_2 + \dots + a_{10} - a_1}_{\text{Lo que ya estaba}} + \underbrace{a_{11} + a_{12} + \dots + a_{20}}_{\text{Los nuevos}} \overbrace{- a_2}^{\text{Comisión}}.
+\\ &amp; =  a_3 + a_4 + a_5 + \dots + a_{20}
+\\ &amp; = \sum\limits_{i = 3}^{20} a_i
+\end{aligned}
+\end{equation}\]</span>
+En general en el momento <span class="math inline">\(n\)</span> nuestra cuenta tiene:
+<span class="math display">\[\begin{equation}\nonumber
+B_n = \sum\limits_{i = n + 1}^{10n} a_i
+\end{equation}\]</span>
+Lo que nos gustaría hacer es evaluar la función cuando <span class="math inline">\(n\)</span> tiende a infinito pero nos topamos con un problema: ¿qué quiere decir la suma de <span class="math inline">\(\infty\)</span> a <span class="math inline">\(\infty\)</span>?
+<span class="math display">\[\begin{equation}\nonumber
+\lim_{n \to \infty} B_n \stackrel{?}{=} \sum\limits_{i = \infty}^{\infty} a_i \stackrel{?}{=} a_{\infty} = \textrm{¿Qué?}
+\end{equation}\]</span>
+Para ello un camino es considerar <span class="math inline">\(f_n(i)\)</span>, una función definida como:
+<span class="math display">\[\begin{equation}\nonumber
+f_n(i) = \begin{cases}
+1 &amp; \text{ si } a_i \text{ está en la suma } B_n, \\
+0 &amp; \text{ si no está.}
+\end{cases}
+\end{equation}\]</span>
+En este caso podemos escribir
+<span class="math display">\[\begin{equation}\nonumber
+B_n&#39; = \sum\limits_{i = 1}^{10n} f_n(i)
+\end{equation}\]</span>
+donde los valores de <span class="math inline">\(B_n&#39;\)</span> y <span class="math inline">\(B_n\)</span> coinciden para toda <span class="math inline">\(n\)</span> (-pausa mientras compruebas-). Por como definimos los <span class="math inline">\(a_i\)</span> tenemos que para cada billete <span class="math inline">\(i\)</span> éste es cobrado por el banco en el paso <span class="math inline">\(B_i\)</span> por lo que para cualquier billete <span class="math inline">\(i\)</span> tenemos que:
+<span class="math display">\[\begin{equation}\nonumber
+\lim_{n \to \infty} f_n (i) = 0;
+\end{equation}\]</span>
+<p>es decir, eventualmente el billete <span class="math inline">\(i\)</span> sale como comisión del banco. Como todos los billetes son cobrados como comisión (<em>i.e.</em> salen de la cuenta) concluimos que en el límite, <span class="math inline">\(\lim_{n \to \infty} B_n\)</span> ¡no hay billetes en el banco!</p>
+</div>
+<div id="pero-tienes-infinito-dinero" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> pero tienes infinito dinero…</h3>
+Analicemos la suma <span class="math inline">\(B_n\)</span> definida arriba. Como los <span class="math inline">\(a_i\)</span> representan que un billete esté en el banco podemos asignar a cada <span class="math inline">\(a_i\)</span> el valor de <span class="math inline">\(1\)</span> y modelar los <span class="math inline">\(B_n\)</span> como la cantidad de dinero en tu cuenta bancaria al momento <span class="math inline">\(n\)</span>. Tenemos entonces que
+<span class="math display">\[\begin{equation}
+B_n = \sum\limits_{i = n + 1}^{10n} a_i = \sum\limits_{i = n + 1}^{10n} 1 = \underbrace{10n - (n + 1) + 1}_{\# \text{valores entre} n+1 \text{ y } 10n} = 10 n - n = 9n
+\end{equation}\]</span>
+<p>en cuyo caso <span class="math inline">\(\lim_{n \to \infty} B_n = \lim_{n \to \infty} 9n = \infty\)</span>. Por lo que concluimos que en nuestra cuenta de banco hay infinito dinero. ¡Pero no hay un solo billete! (si hubiera billetes ¿cuál es el número de uno de ellos?).</p>
+<div id=" Nota0.760992327937856 " class="alert alert-info">
+<b> Nota : </b> Como <span class="math inline">\(B_n = B_n&#39;\)</span> tenemos que en el límite <span class="math inline">\(B_n&#39;\to \infty\)</span>. Aparentemente tenemos una suma sin sumandos que suma a infinito ¡qué locura!
+</div>
+</div>
+<div id="es-mas-la-cantidad-de-billetes-depende-de-como-el-banco-cobra-la-comision" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Es más, la cantidad de billetes depende de cómo el banco cobra la comisión</h3>
+Si el banco en lugar de cobrar la comisión usando el primer billete que metiste tomara el último que metiste (es decir, en la primer transacción el billete <span class="math inline">\(10\)</span>; en la segunda el billete <span class="math inline">\(20\)</span>; en la tercera el <span class="math inline">\(20\)</span>) tendríamos en este caso que:
+<span class="math display">\[\begin{equation}\nonumber
+\lim_{n \to \infty} f_n (i) = 
+\begin{cases}
+0 \text{ si } i \text{ es múltiplo de } 10, \\
+1 \text{ si } i \text{ no lo es}.
+\end{cases};
+\end{equation}\]</span>
+<p>por lo que habría infinitos billetes en el banco (por ejemplo, los billetes marcados con un <span class="math inline">\(1\)</span> <em>i.e.</em> el <span class="math inline">\(1, 11, 111, 1111, 11111, \dots\)</span>) están en el banco.</p>
+<div id=" Nota0.265683740843087 " class="alert alert-info">
+<b> Nota : </b> En toda esta sección las matemáticas son correctas. El problema (y la discusión filosófica) radica en decidir si esta forma de modelar e interpretar el modelo tiene sentido en la vida real. De hecho éste sigue siendo un tema activo en <a href="https://plato.stanford.edu/entries/spacetime-supertasks/">filosofía</a> ¿Qué crees tú?
+</div>
+</div>
+<div id="explicacion-de-la-paradoja" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> Explicación de la paradoja</h3>
+El problema radica en que estamos acostumbrados a intercambiar límites con sumas y pensar que, esencialmente, son lo mismo. ¡No es así! Por un lado tenemos que (en el primer ejemplo) <span class="math inline">\(\lim_{n \to \infty} f_n (i) = 0\)</span>. La intuición nos lleva a pensar que ese límite se “metería” a la suma para acabar con algo del estilo
+<span class="math display">\[\begin{equation}\nonumber
+B_{\infty}&#39; \stackrel{!}{=} \sum\limits_{i = 1}^{\infty} \lim_{n \to \infty} f_n (i) = \sum\limits_{i = 1}^{\infty} 0 = 0
+\end{equation}\]</span>
+pero en realidad los límites de la suma y la suma de los límites no son lo mismo
+<span class="math display">\[\begin{equation}\nonumber
+ \lim_{n \to \infty} \sum\limits_{i = 1}^{n} \lim_{m \to \infty} f_m (i)  \neq  \lim_{n \to \infty} \sum\limits_{i = 1}^{n} f_n (i).
+\end{equation}\]</span>
+<div id=" Advertencia0.532641468336806 " class="alert alert-warning">
+<b> Advertencia : </b> El límite de una suma es, generalmente distinta, a la suma de los límites. Una forma de recordarlo es:
+<span class="math display">\[\begin{equation}\nonumber
+\lim \sum\limits^{\infty} \neq \sum\limits^{\infty}  \lim
+\end{equation}\]</span>
+</div>
+</div>
+</div>
+<div id="serie-de-grandi-i.e.paradoja-del-agrupamiento" class="section level2">
+<h2><span class="header-section-number">1.3</span> Serie de Grandi (i.e. paradoja del agrupamiento)</h2>
+Considera la serie <span class="math inline">\(\mathcal{S} = \sum_{n=0}^{\infty} (-1)^n = 1 - 1 + 1 - 1 + \dots\)</span>. Esta serie la podríamos ver (incorrectamente) de dos maneras. La primera es agrupando los <span class="math inline">\(1\)</span> seguidos de los <span class="math inline">\(-1\)</span>:
+<span class="math display">\[\begin{equation}\nonumber
+\mathcal{S} = \sum_{n=0}^{\infty} (-1)^n \stackrel{?}{=} (1 - 1) + (1 - 1) + (1 - 1) + (1-1) + \dots = 0 + 0 + 0 + 0 + \dots = 0
+\end{equation}\]</span>
+la otra idea sería dejando un <span class="math inline">\(1\)</span> libre al inicio y agrupando los <span class="math inline">\(-1\)</span> seguidos de los <span class="math inline">\(1\)</span>:
+<span class="math display">\[\begin{equation}\nonumber
+\mathcal{S} = \sum_{n=0}^{\infty} (-1)^n \stackrel{?}{=} 1 + (- 1 + 1) + (- 1 + 1) +  (- 1 + 1) + (-1 + 1) + \dots = 1 + 0 + 0 + 0 + \dots = 1
+\end{equation}\]</span>
+Tenemos una serie que, aparentemente, nos da <span class="math inline">\(1\)</span> y por otro lado nos da <span class="math inline">\(0\)</span>. ¡Esto no tiene ningún sentido! Hay una tercer forma en la que obtenemos <span class="math inline">\(1/2\)</span>:
+<span class="math display">\[\begin{equation}\nonumber
+\mathcal{S} = \sum_{n=0}^{\infty} (-1)^n \stackrel{?}{=} 1 - (1 - 1 + 1 - 1 + 1 - 1 + 1 - 1 + \dots) = 1 - \mathcal{S}
+\end{equation}\]</span>
+de donde despejando <span class="math inline">\(\mathcal{S}\)</span> tenemos que: <span class="math inline">\(2 \mathcal{S} = 1\)</span> y por tanto <span class="math inline">\(\mathcal{S} = \frac{1}{2}\)</span>. ¡Las matemáticas no tienen sentido! (-pausa mientras buscas dónde está el error-).<br />
+El problema tiene solución: nada nos dice que podemos usar la propiedad asociativa en series infinitas. De hecho las tres formas de derivar un resultado para la serie son incorrectas<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>: la serie no converge. Este último hecho podemos verlo recordando que la serie en realidad es un límite. Para ello consideramos los primeros <span class="math inline">\(k\)</span> términos de la serie.
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{n = 0}^{k} (-1)^n = 
+\begin{cases}
+1 &amp; \textrm{ si } k \textrm{ par, }\\
+0 &amp; \textrm{ si } k \textrm{ impar. }
+\end{cases}
+\end{equation}\]</span>
+Si analizamos el límite notaremos que éste no existe:
+<span class="math display">\[\begin{equation}
+\lim_{k \to \infty} \sum\limits_{n = 0}^{k} (-1)^n = \lim_{k \to \infty}
+\begin{cases}
+1 &amp; \textrm{ si } k \textrm{ par, }\\
+0 &amp; \textrm{ si } k \textrm{ impar. }
+\end{cases}
+\equiv \textrm{ No existe. }
+\end{equation}\]</span>
+¿Y dónde estuvo el problema? ¿Por qué concluimos la serie era <span class="math inline">\(0,1\)</span> ó <span class="math inline">\(\frac{1}{2}\)</span>? El problema estuvo en asumir que podíamos agrupar términos arbitrariamente. Acabamos de descubrir que en una suma infinita la forma en la que agrupamos los términos sí importa pues en particular:
+<span class="math display">\[\begin{equation}
+\underbrace{1 + (- 1 + 1) + (- 1 + 1) +  (- 1 + 1) + (-1 + 1) + \dots}_{ = 1} \neq \underbrace{(1 - 1) + (1 - 1) + (1 - 1) + (1-1) + \dots}_{= 0}.
+\end{equation}\]</span>
+<div id=" Advertencia0.493889110395685 " class="alert alert-warning">
+<b> Advertencia : </b> En general, los sumandos de una serie infinita no son asociativos.
+</div>
+</div>
+<div id="paradoja-del-rearreglo" class="section level2">
+<h2><span class="header-section-number">1.4</span> Paradoja del rearreglo</h2>
+El problema del rearreglo de series es aún más paradógico. Para ello tomemos un <span class="math inline">\(\alpha \geq 1\)</span> y consideremos la serie divergente (revisa que es divergente):
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{i = 1}^{\infty} \frac{1}{2i - 1} = \infty
+\end{equation}\]</span>
+Como se va a <span class="math inline">\(\infty\)</span> la serie entonces existe un término <span class="math inline">\(m_1 \geq 2\)</span> que cumple que <span class="math inline">\(m_1\)</span> es el primer término que hace que la suma <span class="math inline">\(\sum\limits_{i = 1}^{m_1} \frac{1}{2i - 1}\)</span> sea mayor a <span class="math inline">\(\alpha\)</span>. Por ejemplo si <span class="math inline">\(\alpha = 10\)</span> tenemos que después de <span class="math inline">\(m_{10} = 68,100,151\)</span> sumandos la suma vale aproximadamente <span class="math inline">\(10.000000007\)</span> por lo que <span class="math inline">\(\sum\limits_{i = 1}^{68,100,151} \frac{1}{2i - 1} &gt; \alpha\)</span>. Dada la caracterización del <span class="math inline">\(m_1\)</span> como el primer número que hace que la suma supere a <span class="math inline">\(\alpha\)</span> tenemos que :
+<span class="math display">\[\begin{equation}\nonumber
+\alpha \geq  \sum\limits_{i = 1}^{m_1 - 1} \frac{1}{2i - 1} \geq  \sum\limits_{i = 1}^{m_1} \frac{1}{2i - 1} -  \frac{1}{2m_1 - 1} \geq \sum\limits_{i = 1}^{m_1} \frac{1}{2i - 1} - \frac{1}{3}
+\end{equation}\]</span>
+donde la última desigualdad se sigue de que <span class="math inline">\(m_1 &gt; 2\)</span> (-pausa en lo que compruebas que las desigualdades son ciertas-). Sea <span class="math inline">\(m_2\)</span> el primer entero mayor a <span class="math inline">\(m_1\)</span> (<em>i.e.</em> <span class="math inline">\(m_2\)</span> está en el conjunto <span class="math inline">\(\{m_1 + 1, m_1 + 2, m_1 + 3, \dots \}\)</span>) que cumple que:
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{i = 1}^{m_1} \frac{1}{2i - 1} - \frac{1}{3} + \sum\limits_{i = m_1 + 1}^{m_2} \frac{1}{2i - 1} &gt; \alpha.
+\end{equation}\]</span>
+Donde, aplicando el mismo razonamiento (-pausa mientras verificas que la ecuación de abajo tiene sentido-) de antes tenemos que:
+<span class="math display">\[\begin{equation}\nonumber
+\sum\limits_{i = 1}^{m_1} \frac{1}{2i - 1} - \frac{1}{3} + \sum\limits_{i = m_1 + 1}^{m_2} \frac{1}{2i - 1} - \frac{1}{9} &lt; \alpha.
+\end{equation}\]</span>
+<p>(-¡No olvides la pausa!-).</p>
+<div id=" Advertencia0.422958017326891 " class="alert alert-warning">
+<b> Advertencia : </b> En general, los sumandos de una serie infinita no son conmutativos.
+</div>
+</div>
+<div id="ejercicios" class="section level2">
+<h2><span class="header-section-number">1.5</span> Ejercicios</h2>
+<ol style="list-style-type: decimal">
+<li><strong>Lámpara de Thomson</strong> Considera una lámpara que tiene un switch de tal forma que sólo está <strong>prendida</strong> o <strong>apagada</strong>. Durante un minuto se lleva acabo el siguiente experimento: durante el primer <span class="math inline">\(1/2\)</span> minuto se prende; durante el siguiente <span class="math inline">\(1/4\)</span> se apaga; durante el siguiente <span class="math inline">\(1/8\)</span> se prende de nuevo; en el <span class="math inline">\(1/16\)</span> consecuente se apaga; durante el <span class="math inline">\(1/32\)</span> se prende y así sucesivamente. ¿La lámpara estará prendida o apagada al terminar el minuto? Plantea el problema usando una serie, <em>justifica</em> tu planteamiento así como la interpretación del resultado.</li>
+<li><strong>Rearreglos 1</strong> Reacomoda las siguientes series para que te den los valores indicados:
+<ul>
+<li>La serie <span class="math inline">\(\sum_{i = 1}^{n} \frac{(-1)^{(n+1)}}{n}\)</span> para que converja a <span class="math inline">\(4\)</span>.</li>
+<li>La serie <span class="math inline">\(\sum_{i = 1}^{n} (-1)^n\)</span> para que converja a <span class="math inline">\(652\)</span>.</li>
+<li>La serie <span class="math inline">\(\sum_{i = 1}^{\infty} \frac{1}{2i - 1}\)</span> para que converja a <span class="math inline">\(\pi\)</span>.</li>
+</ul></li>
+<li><strong>Tu turno de hacer magia</strong> Inventa una serie (distinta a las de los ejemplos y ejercicios) que bajo un rearreglo converja a <span class="math inline">\(2\)</span> y bajo otro rearreglo a <span class="math inline">\(-1\)</span>.</li>
+<li>Encuentra el error en el proceso de la siguiente demostración (algo hicieron mal y con ello acabaron con esa conclusión ¿qué hicieron mal?): 
+<div class="panel panel-default">
+	<div id =  Teorema falso0.147392730228603  class="panel-heading">
+		<h4> Teorema falso  </h4>
+	</div>
+	<div class="panel-body">
+		<i>$2 = 1$.</i>
+		<div class="well" style = "margin-top: 10px;">
+			 <b>Demostración:</b> 
+Sea $\mathcal{S} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \frac{1}{7} - \frac{1}{8} + \frac{1}{9} - \frac{1}{10} + \frac{1}{11} - \frac{1}{12} + \dots$. Multiplicando la ecuación por $2$ obtenemos que:
+\begin{equation}\nonumber
+2\mathcal{S}  = 2 - 1 + \frac{2}{3} - \frac{1}{2} + \frac{2}{5} - \frac{1}{3} + \frac{2}{7}  - \frac{1}{4} + \frac{2}{9} - \frac{1}{5} + \frac{2}{11} - \frac{1}{6} \dots
+\end{equation}
+Si agrupamos los términos con el mismo denominador tenemos que
+\begin{equation}\nonumber
+\begin{aligned}
+2\mathcal{S}  & = (2 - 1)  - \frac{1}{2}  + (\frac{2}{3} - \frac{1}{3})   - \frac{1}{4} + (\frac{2}{5} - \frac{1}{5}) - \frac{1}{6} + (\frac{2}{7} - \frac{1}{7}) - \dots \\
+& = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \frac{1}{7} - \dots
+\end{aligned}
+\end{equation}
+de donde se sigue que: $2\mathcal{S} = \mathcal{S}$ y, dividiendo entre $\mathcal{S}$ se tiene que $2 = 1$. 
+
+
+ 
+		</div>
+	</div>
+</div>
+</li>
+<li>Determina por qué la siguiente “solución” es incorrecta. Argumenta dónde está el error y por qué es un error. Finalmente, encuentra el verdadero valor al cual converge <span class="math inline">\(\mathcal{S}\)</span> (no es a <span class="math inline">\(1\)</span>). 
+<div class="panel panel-default">
+	<div id =  Ejercicio incorrecto0.781091446056962  class="panel-heading">
+		<h4> Ejercicio incorrecto  </h4>
+	</div>
+	<div class="panel-body">
+		<i>Evalúa la convergencia de la serie $\mathcal{S} = \sum\limits_{n = 1}^{\infty} \frac{1}{(2n-1)(2n+1)}$</i>
+		<div class="well" style = "margin-top: 10px;">
+			 <b>Demostración:</b> 
+1. Sea $\mathcal{S} = \sum\limits_{n = 1}^{\infty} \frac{1}{(2n-1)(2n+1)}$ luego tenemos que:
+\begin{equation}
+\begin{aligned}
+\mathcal{S} & = \frac{1}{3} + \frac{1}{15} + \frac{1}{35} + \frac{1}{63} + \dots \\
+& = \underbrace{\Big( 1 - \frac{2}{3} \Big)}_{= 1/3} + \underbrace{\Big(\frac{2}{3} - \frac{3}{5}\Big)}_{= 1/15} + \underbrace{\Big(\frac{3}{5} - \frac{4}{7}\Big)}_{= 1/35} + \dots
+& = 1
+\end{aligned}
+\end{equation}
+de donde se sigue que $\mathcal{S} = 1$.
+ 
+		</div>
+	</div>
+</div>
+</li>
+<li>Encuentra el error en el proceso de la siguiente demostración (algo hicieron mal y con ello acabaron con esa conclusión ¿qué hicieron mal?): 
+<div class="panel panel-default">
+	<div id =  Ejercicio incorrecto0.0817518930416554  class="panel-heading">
+		<h4> Ejercicio incorrecto  </h4>
+	</div>
+	<div class="panel-body">
+		<i>Evalúa la convergencia de la serie $\mathcal{S} = \sum\limits_{n = 1}^{\infty} \frac{1}{(2n-1)(2n+1)}$</i>
+		<div class="well" style = "margin-top: 10px;">
+			 <b>Demostración:</b> 
+Considera la siguiente serie:
+\begin{equation}\nonumber
+\begin{aligned}
+\mathcal{S} =   1 - 2 + 4 - 8 + 16 - 32 + 64 - \dots = \sum\limits_{n = 1}^{\infty} (-2)^{n-1}
+\end{aligned}
+\end{equation}
+Luego tenemos que:
+\begin{equation}\nonumber
+\begin{aligned}
+\mathcal{S} & =  1 - 2 + 4 - 8 + 16 - 32 + 64 - \dots 
+\\ & = 1 + (-2 + 4) + (-8 + 16) + (-32 + 64) + \dots
+\\ & = 1 + 2 + 8 + 32 + \dots = \infty;
+\end{aligned}
+\end{equation}
+por otro lado tenemos que:
+\begin{equation}\nonumber
+\begin{aligned}
+\mathcal{S} & =  1 - 2 + 4 - 8 + 16 - 32 + 64 - \dots 
+\\ &  = (1 -2) + (4 -8) + (16 - 32) + (64 - 128) + \dots 
+\\ & = -1 -4 -16 - 64 \dots = -\infty
+\end{aligned}
+\end{equation}
+Combinando los resultados tenemos que $\infty = - \infty$. 
+ 
+		</div>
+	</div>
+</div>
+</li>
+<li>Crea una demostración falaz (semejante a los ejercicios anteriores) en la que “demuestres” que <span class="math inline">\(-1 = 1\)</span> usando series de manera incorrecta. Aclara dónde está el error y por qué es falsa la demostración.</li>
+<li>Considera un juego como el de la <a href="#paradoja-de-san-petesburgo">paradoja de San Petesburgo</a>. Asume que en lugar de que en cada turno se dupliquen las ganancias éstas sólo se aumenten <span class="math inline">\(1.5\)</span> veces. En este caso ¿cuál es la ganancia esperada? ¿si fueras un casino, cuánto es lo mínimo que deberías cobrar a tus clientes por participar en el juego?</li>
+<li><strong>Las series son del diablo</strong> Lee la siguiente historia (traducida de <span class="citation">Hamkins and Lewis (2000)</span>):
+<ul>
+<li>Modela el proceso de intercambio usando series.</li>
+<li>Justifica el resultado usando series.</li>
+</ul></li>
+</ol>
+<blockquote>
+<p>Vamos a suponer que tienes una cantidad infinita de billetes de un dólar numerados [de manera impar] <span class="math inline">\(1,3,5, \dots\)</span> y que, al entrar a un bar clandestino de mala muerte te encuentras al mismísimo Diablo sentado en una mesa con una pila enorme de dinero. Te sientas y el Diablo te explica que tiene un cariño especial por tus billetes y está listo para pagarte una cantidad importante de dinero por cada uno. Específicamente, está dispuesto a pagar 2 dólares por cada uno de los billetes de un dólar que posees. Para llevar a cabo el intercambio propone una sucesión infinita de transacciones donde en cada una te dará los dos dólares y él te dará uno de sus dólares. La primer transacción tomará <span class="math inline">\(1/2\)</span> de hora; la segunda <span class="math inline">\(1/4\)</span>; la tercera <span class="math inline">\(1/8\)</span> y así sucesivamente, de tal forma que después de una hora el intercambio habrá finalizado. El Diablo toma un poco de whisky mientras tú lo piensas: ¿deberías aceptar su propuesta? Quizá piensas que te volverás aún más rico o que, dado que hay un número infinito de billetes, no hará ninguna diferencia. Por lo menos, piensas, no hará daño así que firmas el contrato y comienza el procedimiento. ¿Cómo podría dañarte el trato?</p>
+<p>Inicialmente parece que has hecho un buen trato: él te paga dos dólares y tú das sólo uno. El Diablo es muy particular, empero, en el orden en el que los billetes son intercambiados. El contrato estipula que en cada sub-transacción él [¿o ella?] adquiere de ti tu billete con número más bajo y te paga con dos billetes con número más alto. Entonces, en tu primer transacción él acepta tu billete número <span class="math inline">\(1\)</span> y te paga con billetes numerados <span class="math inline">\(2\)</span> y <span class="math inline">\(4\)</span>. En la siguiente transacción él te compra el billete número <span class="math inline">\(2\)</span> (que recién te pagó) y te da billetes numerados <span class="math inline">\(6\)</span> y <span class="math inline">\(8\)</span>. En el siguiente turno te compra el billete número <span class="math inline">\(3\)</span> y te da billetes <span class="math inline">\(10\)</span> y <span class="math inline">\(12\)</span> y así. Cuando los intercambios han terminado ¿qué descubres? ¡No tienes nada de billetes!</p>
+</blockquote>
+</div>
+</div>
+<div id="viendo-al-futuro" class="section level1">
+<h1><span class="header-section-number">2</span> Viendo al futuro</h1>
+<p>Aunque las series infinitas son divertidas no lo son todo en esta vida. En particular desde hace mucho tiempo los matemáticos han dejado de investigar las series infinitas en los reales por sí mismas. Hay varias áreas en matemáticas que estudian series: por ejemplo, el estudio de <a href="https://en.wikipedia.org/wiki/Analytic_function">funciones analíticas</a>, de <a href="https://en.wikipedia.org/wiki/Fourier_series">series de Fourier</a> o (en general) <a href="https://en.wikipedia.org/wiki/Orthonormal_basis">bases ortonormales</a> (como las de álgebra matricial). Una de las generalizaciones que me parecen más interesantes son las <strong>caminatas aleatorias</strong>.</p>
+Imagina una persona que está centrada en el <span class="math inline">\(0\)</span>. Asume que la persona tiene una moneda con caras <strong>águila</strong> y <strong>sol</strong> que tira de manera aleatoria según los resultados decide su próximo movimiento: si obtiene águila se mueve a la derecha (<span class="math inline">\(+1\)</span>) mientras que si obtiene un sol se mueve a la izquierda (<span class="math inline">\(-1\)</span>). Considera que este proceso continúa indefinidamente. La posición de la persona al tiro <span class="math inline">\(n\)</span>, <span class="math inline">\(\mathcal{P}_n\)</span>, está dada por:
+<span class="math display">\[\begin{equation}
+\mathcal{P}_n = X_1 + X_2 + \dots + X_n = \sum\limits_{i = 1}^{n} X_i.
+\end{equation}\]</span>
+donde las variables aleatorias <span class="math inline">\(X_k\)</span> (<span class="math inline">\(k = 1,2,\dots, n\)</span>) representan el resultado asignado al <span class="math inline">\(k\)</span>-ésimo tiro de la moneda (<span class="math inline">\(+1 \to \text{Águila}\)</span> y <span class="math inline">\(-1 \to \text{Sol}\)</span>). Por poner un ejemplo si una persona ha hecho tres tiros y obtuvo Águila, Sol, Sol tendrá que:
+<span class="math display">\[\begin{equation}
+\mathcal{P}_n = \underbrace{1}_{X_1} + \underbrace{-1}_{X_2} + \underbrace{-1}_{X_3};
+\end{equation}\]</span>
+y su posición será el <span class="math inline">\(-1\)</span> al tiro <span class="math inline">\(3\)</span>. Una persona que obtuvo en tres tiros Águila, Águila, Águila tendrá:
+<span class="math display">\[\begin{equation}
+\mathcal{P}_n = \underbrace{1}_{X_1} + \underbrace{1}_{X_2} + \underbrace{1}_{X_3}
+\end{equation}\]</span>
+<p>y su posición al tiro <span class="math inline">\(3\)</span> será <span class="math inline">\(3\)</span>.</p>
+Modelos como éste pueden parecer completamente ociosos; empero, son bastante útiles en la práctica. La <a href="https://en.wikipedia.org/wiki/Random_walk_hypothesis">hipótesis de la caminata aleatoria del mercado financiero</a> establece que los precios de una acción se mueven de manera aleatoria aumentando y disminuyendo cada segundo sin dependencia en el pasado. De manera simple, la idea es que el precio de una acción al segundo <span class="math inline">\(n\)</span> (llamémosla <span class="math inline">\(\mathcal{P}_n\)</span>) aumenta o disminuye <span class="math inline">\(\pm 1\)</span> aleatoriamente con distintas probabilidades (por ejemplo puede aumentar con probabilidad <span class="math inline">\(0.64\)</span> y disminuir con probabilidad <span class="math inline">\(0.36\)</span>). Es decir, el precio de una acción puede escribirse como una caminata aleatoria:
+<span class="math display">\[\begin{equation}
+\mathcal{P}_n = \sum\limits_{i = 1}^{n} X_i
+\end{equation}\]</span>
+<p>donde las <span class="math inline">\(X_i\)</span> son variables aleatorias que toman valores <span class="math inline">\(\pm 1\)</span> con distintas probabilidades.</p>
+<p>Hay varias preguntas interesantes en este tema, por ejemplo ¿cuál es la probabilidad de que el precio de una acción llegue a <span class="math inline">\(0\)</span> (ruina)?, ¿cuándo es el momento óptimo para vender una acción dado que su precio fluctúa aleatoriamente?, dados <span class="math inline">\(\$1000\)</span> ¿cuánto de cada acción comprar si quiero obtener un beneficio a un año de al menos <span class="math inline">\(\$100\)</span> con <span class="math inline">\(99\%\)</span> de probabilidad? Dar respuestas a estos cuestionamientos así como encontrar modelos más adecuados requiere de herramientas teóricas matemáticas pesadas (muchas basadas en los temas de Análisis Matemático) por lo que dar una referencia es complicado (uno de los clásicos son los <a href="http://www.springer.com/la/book/9780387401010">dos tomos de Shreve</a>); lo que puedo sugerir, si esto te interesa es echarle un ojo <a href="https://www.amazon.es/Random-Walk-Down-Wall-Street/dp/0393352242/ref=pd_lpo_sbs_14_t_0?_encoding=UTF8&amp;psc=1&amp;refRID=DWGYARMR9PC4J5MEXG93"><em>A Random Walk Down Wall Street</em></a> pues es un libro de divulgación.</p>
+</div>
+<div id="referencias" class="section level1">
+<h1><span class="header-section-number">3</span> Referencias</h1>
+<!-- Aquí van las referencias -->
+<div id="refs" class="references">
+<div id="ref-candelpergher2017ramanujan">
+<p>Candelpergher, Bernard. 2017. <em>Ramanujan Summation of Divergent Series</em>. Vol. 2185. Springer.</p>
+</div>
+<div id="ref-supertask">
+<p>Hamkins, Joel David, and Andy Lewis. 2000. “Infinite Time Turing Machines.” <em>The Journal of Symbolic Logic</em> 65 (2). Cambridge University Press: 567–604.</p>
+</div>
+<div id="ref-hardy2000divergent">
+<p>Hardy, Godfrey Harold. 2000. <em>Divergent Series</em>. Vol. 334. American Mathematical Soc.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Técnicamente ninguna forma es incorrecta e incluso hay gente que se ha dedicado a estudiar cómo sacar los límites de las series cuando, por ejemplo queremos que esa serie sea <span class="math inline">\(1\)</span> o que sea <span class="math inline">\(-1\)</span> y analiza qué implica para el resto de las sumas. Puedes ver, por ejemplo a <span class="citation">Hardy (2000)</span> y a <span class="citation">Candelpergher (2017)</span>.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+      <b>Contáctame</b> en <a href="mailto:rzepeda17@gmail.com?Subject=Random Math" target="_top">rzepeda17@gmail.com</a>
+    </div>
+    <div class="panel-footer"><span  xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><small><b>Notas de Cálculo III (ITAM)</b></span> por <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Rodrigo Zepeda</span> tiene una licencia <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>. </small><br /></div>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
