@@ -1,6 +1,6 @@
 ---
-title: "Sumas, sumas y más sumas"
-author: "Rodrigo Zepeda"
+title: "C++"
+author: "Esteban Martínez"
 output:
   html_document:
     css: css/bootstrap.css
@@ -43,6 +43,18 @@ opts_chunk$set(fig.align='center')
 #Function for authomatic theorem, corollary, example, counterexample, property, lemma and definition numbering
 source("Rfun/theorem_creator.R")
 ```
+#string
+
+##Métodos
+
+substr
+
+str.substr(i,n):
+    donde i indica el índice y n el tamaño del substring.
+
+
+
+
 
 #Dos problemas iniciales
 
